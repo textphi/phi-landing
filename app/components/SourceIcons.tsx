@@ -111,15 +111,10 @@ const ICONS: Record<string, { node: ReactNode; color: string }> = {
     ),
   },
   "Market data": {
-    color: "#9a9ca3",
+    color: "#8f74ff",
     node: (
-      <svg width="20" height="20" viewBox="0 0 24 24" {...stroke}>
-        <line x1="6" y1="4" x2="6" y2="20" />
-        <rect x="4.4" y="8" width="3.2" height="7" rx="0.6" />
-        <line x1="12" y1="6" x2="12" y2="18" />
-        <rect x="10.4" y="9" width="3.2" height="6" rx="0.6" />
-        <line x1="18" y1="3" x2="18" y2="17" />
-        <rect x="16.4" y="6" width="3.2" height="7" rx="0.6" />
+      <svg width="21" height="21" viewBox="0 0 24 24">
+        <text x="11" y="17.5" textAnchor="middle" fontFamily="Arial, Helvetica, sans-serif" fontWeight="800" fontSize="16" fill="currentColor">y!</text>
       </svg>
     ),
   },
