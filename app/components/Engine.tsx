@@ -2,18 +2,18 @@
 
 import { useEffect, useState } from "react";
 import styles from "./Engine.module.css";
-import { SourceIcon } from "./SourceIcons";
+import { CompanyIcon, SourceIcon } from "./SourceIcons";
 
 /* ---------- Data ---------- */
 
 const SOURCES: { src: string; text: string }[] = [
   { src: "SEC", text: "MU 10-Q filed" },
-  { src: "Yahoo Finance", text: "NVDA −6.2% today" },
+  { src: "Yahoo Finance", text: "NVDA -6.2% today" },
   { src: "Reddit", text: "r/stocks SNDK discussion spiking" },
   { src: "X", text: "semiconductor export limits trending" },
   { src: "Earnings", text: "MSFT Q4 call transcript available" },
   { src: "Congress", text: "Pelosi new transaction disclosed" },
-  { src: "News", text: "Reuters — AI chip restrictions" },
+  { src: "News", text: "Reuters - AI chip restrictions" },
   { src: "Market data", text: "TSLA volume 2.4x average" },
   { src: "Your portfolio", text: "18% NVDA" },
   { src: "Your rule", text: "max position 15%" },
@@ -71,9 +71,10 @@ const OUTPUTS: {
 /* ---------- Sub-components ---------- */
 
 function Chip({ src, text, i }: { src: string; text: string; i: number }) {
+  const company = text.includes("MSFT") ? "Microsoft" : text.includes("NVDA") ? "Nvidia" : text.includes("MU ") ? "Micron" : text.includes("SNDK") ? "SanDisk" : text.includes("TSLA") ? "Tesla" : undefined;
   return (
     <div className={styles.chip} style={{ ["--i" as string]: i }} aria-hidden="true">
-      <SourceIcon name={src} className={styles.chipIcon} />
+      <span className={styles.chipIcon}>{company ? <CompanyIcon name={company} className={styles.companyMark} /> : <SourceIcon name={src} />}</span>
       <span className={styles.chipBody}>
         <span className={styles.chipSrc}>{src}</span>
         <span className={styles.chipText}>{text}</span>
