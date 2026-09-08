@@ -33,7 +33,7 @@ export default function Hero() {
           </h1>
 
           <p className={styles.subline}>
-            Research. Watch. Simulate. In your texts.
+            Research. Watch. Test. In your texts.
           </p>
 
           <a className={styles.cta} href="#">
