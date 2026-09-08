@@ -18,6 +18,12 @@ const stroke = {
   strokeLinejoin: "round" as const,
 };
 
+const BACKGROUNDS: Record<string, string> = {
+  SEC: "#40516a", "Yahoo Finance": "#6548c6", Reddit: "#ff4500", X: "#111214",
+  Earnings: "#536d91", Congress: "#536577", News: "#b96b31", "Market data": "#6548c6",
+  "Your portfolio": "#4c7777", "Your rule": "#5e697d", "Paper portfolio": "#647087",
+};
+
 const ICONS: Record<string, { node: ReactNode; color: string }> = {
   SEC: {
     color: "#9a9ca3",
@@ -111,15 +117,10 @@ const ICONS: Record<string, { node: ReactNode; color: string }> = {
     ),
   },
   "Market data": {
-    color: "#9a9ca3",
+    color: "#8f74ff",
     node: (
-      <svg width="20" height="20" viewBox="0 0 24 24" {...stroke}>
-        <line x1="6" y1="4" x2="6" y2="20" />
-        <rect x="4.4" y="8" width="3.2" height="7" rx="0.6" />
-        <line x1="12" y1="6" x2="12" y2="18" />
-        <rect x="10.4" y="9" width="3.2" height="6" rx="0.6" />
-        <line x1="18" y1="3" x2="18" y2="17" />
-        <rect x="16.4" y="6" width="3.2" height="7" rx="0.6" />
+      <svg width="21" height="21" viewBox="0 0 24 24">
+        <text x="11" y="17.5" textAnchor="middle" fontFamily="Arial, Helvetica, sans-serif" fontWeight="800" fontSize="16" fill="currentColor">y!</text>
       </svg>
     ),
   },
@@ -162,8 +163,24 @@ export function SourceIcon({
 }) {
   const ic = ICONS[name] ?? ICONS.SEC;
   return (
-    <span className={className} style={{ color: ic.color }} aria-hidden="true">
+    <span className={className} style={{ color: ic.color, backgroundColor: BACKGROUNDS[name] ?? "#50535a" }} aria-hidden="true">
       {ic.node}
     </span>
   );
+}
+
+const COMPANIES: Record<string, ReactNode> = {
+  Micron: <span>M</span>,
+  Nvidia: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 12c3.8-5.5 10.2-5.5 18 0-7.8 5.5-14.2 5.5-18 0Z"/><circle cx="12" cy="12" r="3.2"/></svg>,
+  SanDisk: <span>S</span>,
+  Microsoft: <svg viewBox="0 0 24 24"><path fill="currentColor" d="M3 3h8v8H3zM13 3h8v8h-8zM3 13h8v8H3zM13 13h8v8h-8z"/></svg>,
+  Tesla: <span>T</span>,
+};
+
+const COMPANY_BACKGROUNDS: Record<string, string> = {
+  Micron: "#c9364d", Nvidia: "#76b900", SanDisk: "#e2231a", Microsoft: "#1576d1", Tesla: "#cc343d",
+};
+
+export function CompanyIcon({ name, className }: { name: string; className?: string }) {
+  return <span className={className} aria-label={name} style={{ backgroundColor: COMPANY_BACKGROUNDS[name] ?? "#50535a" }}>{COMPANIES[name]}</span>;
 }
