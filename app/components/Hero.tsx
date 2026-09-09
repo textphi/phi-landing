@@ -9,6 +9,7 @@ type SubmissionState = "idle" | "submitting" | "error";
 
 export default function Hero() {
   const [waitlistOpen, setWaitlistOpen] = useState(false);
+  const [joined, setJoined] = useState(false);
   const [accepted, setAccepted] = useState(false);
   const [phone, setPhone] = useState("");
   const [submissionState, setSubmissionState] = useState<SubmissionState>("idle");
@@ -42,6 +43,7 @@ export default function Hero() {
       setSubmissionState("idle");
       setSubmissionMessage("");
       setWaitlistOpen(false);
+      setJoined(true);
     } catch (error) {
       setSubmissionState("error");
       setSubmissionMessage(
@@ -92,9 +94,13 @@ export default function Hero() {
             Research. Watch. Test. In your texts.
           </p>
 
-          <button className={styles.cta} type="button" onClick={() => setWaitlistOpen(true)}>
-            Join Waitlist
-          </button>
+          {joined ? (
+            <p className={styles.joinedNote}>You&rsquo;re on the waitlist!</p>
+          ) : (
+            <button className={styles.cta} type="button" onClick={() => setWaitlistOpen(true)}>
+              Join Waitlist
+            </button>
+          )}
         </div>
 
         <div className={styles.phoneWrap}>
