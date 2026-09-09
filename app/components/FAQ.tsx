@@ -10,60 +10,67 @@ const FAQ_ITEMS: FAQItem[] = [
   {
     question: <>is phi a financial advisor?</>,
     answers: [
-      <>no. phi gives you research, analysis, monitoring, and tools to help you understand your investments.</>,
-      <>it doesn&rsquo;t provide personalized financial advice or make investment decisions for you.</>,
+      <>no, phi gives you research, analysis, monitoring, and tools to help you understand your investments</>,
+      <>it doesn&rsquo;t provide personalized financial advice or make investment decisions for you</>,
     ],
   },
   {
     question: <>how does phi understand my investments?</>,
     answers: [
-      <>you connect your brokerage with read only access.</>,
-      <>phi can then understand what you own, how your portfolio changes, and what news, filings, earnings, and market events actually matter to you.</>,
+      <>you connect your brokerage with read only access</>,
+      <>phi can then understand what you own, how your portfolio changes, and what news, filings, earnings, and market events actually matter to you</>,
     ],
   },
   {
     question: <>can phi move money or place trades?</>,
     answers: [
-      <>not right now. phi is read only.</>,
-      <>it can help you research a trade, test it in a paper portfolio, or tell you exactly what to place.</>,
-      <>you stay in control of execution.</>,
+      <>not right now, phi is read only</>,
+      <>it can help you research a trade, test it in a paper portfolio, or tell you exactly what to place</>,
+      <>you stay in control of execution</>,
     ],
   },
   {
     question: <>how is phi different from a chatbot?</>,
     answers: [
-      <>chatbots wait for you to ask. phi already knows your portfolio and continuously watches what matters.</>,
-      <>it can proactively text you when something changes, instead of waiting for a prompt.</>,
-      <>it also has deep investment research integrations and long term financial memory across your portfolio, research, and paper trades.</>,
+      <>chatbots wait for you to ask, phi already knows your portfolio and continuously watches what matters</>,
+      <>it can proactively text you when something changes, instead of waiting for a prompt</>,
+      <>it also has deep investment research integrations and long term financial memory across your portfolio, research, and paper trades</>,
     ],
   },
   {
     question: <>do i need to download an app?</>,
     answers: [
-      <>no. phi lives in your texts.</>,
-      <>connect your portfolio once, then talk to it like any other contact.</>,
+      <>no, phi lives in your texts</>,
+      <>connect your portfolio once, then talk to it like any other contact</>,
+    ],
+  },
+  {
+    question: <>which platforms is phi available on?</>,
+    answers: [
+      <>phi works best with iMessage</>,
+      <>it also supports SMS fallback, so you can use phi through regular text messages too</>,
     ],
   },
   {
     question: <>is my data safe with phi?</>,
     answers: [
-      <>phi uses snaptrade to connect to your brokerage securely.</>,
-      <>your brokerage credentials aren&rsquo;t shared with phi, and access is read only.</>,
-      <>phi can&rsquo;t move money or place trades.</>,
+      <>phi uses snaptrade to connect to your brokerage securely</>,
+      <>your brokerage credentials aren&rsquo;t shared with phi, and access is read only</>,
+      <>phi can&rsquo;t move money or place trades</>,
     ],
   },
   {
     question: <>will phi spam me with messages?</>,
     answers: [
-      <>no. phi is designed to text you when something actually matters, not every time the market moves.</>,
-      <>you can also tell it what you want to watch and how often you want updates.</>,
+      <>no, phi is designed to text you when something actually matters, not every time the market moves</>,
+      <>you can also tell it what you want to watch and how often you want updates</>,
     ],
   },
   {
     question: <>what&rsquo;s next for phi?</>,
     answers: [
-      <>the beta is launching for free soon.</>,
-      <>join the waitlist and we&rsquo;ll send you a text when it&rsquo;s ready to try.</>,
+      <>the beta is launching for free soon</>,
+      <>join the waitlist and we&rsquo;ll send you a text when it&rsquo;s ready to try</>,
     ],
   },
 ];
