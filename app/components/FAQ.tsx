@@ -12,6 +12,7 @@ const FAQ_ITEMS: FAQItem[] = [
     answers: [
       <>no, phi gives you research, analysis, monitoring, and tools to help you understand your investments</>,
       <>it doesn&rsquo;t provide personalized financial advice or make investment decisions for you</>,
+      <>you remain in full control of all decisions</>,
     ],
   },
   {
@@ -30,11 +31,11 @@ const FAQ_ITEMS: FAQItem[] = [
     ],
   },
   {
-    question: <>how is phi different from a chatbot?</>,
+    question: <>how is phi different from a chatbot like chatgpt?</>,
     answers: [
-      <>chatbots wait for you to ask, phi already knows your portfolio and continuously watches what matters</>,
-      <>it can proactively text you when something changes, instead of waiting for a prompt</>,
-      <>it also has deep investment research integrations and long term financial memory across your portfolio, research, and paper trades</>,
+      <>a chatbot like chatgpt waits for you to ask. phi connects to your portfolio and texts you first on what moves your money, earnings, news, big moves, and what it means for you</>,
+      <>it&rsquo;s trained to think like an equity analyst, with access to research and data a general chatbot can&rsquo;t touch</>,
+      <>and it does things chatgpt can&rsquo;t, like spinning up paper trades to test an idea, and it remembers everything across your holdings and research</>,
     ],
   },
   {
@@ -47,16 +48,16 @@ const FAQ_ITEMS: FAQItem[] = [
   {
     question: <>which platforms is phi available on?</>,
     answers: [
-      <>phi works best with iMessage</>,
-      <>it also supports SMS fallback, so you can use phi through regular text messages too</>,
+      <>phi works best on iMessage, which is end-to-end encrypted</>,
+      <>it also works over SMS if you&rsquo;re not on iMessage</>,
     ],
   },
   {
     question: <>is my data safe with phi?</>,
     answers: [
-      <>phi uses snaptrade to connect to your brokerage securely</>,
-      <>your brokerage credentials aren&rsquo;t shared with phi, and access is read only</>,
-      <>phi can&rsquo;t move money or place trades</>,
+      <>security is core to phi. we connect to your brokerage through snaptrade, an industry-standard provider trusted across fintech, using bank-level encryption and read-only access</>,
+      <>phi never sees your login credentials and can&rsquo;t move money or place trades</>,
+      <>you stay fully in control of your accounts</>,
     ],
   },
   {
@@ -69,8 +70,8 @@ const FAQ_ITEMS: FAQItem[] = [
   {
     question: <>what&rsquo;s next for phi?</>,
     answers: [
-      <>the beta is launching for free soon</>,
-      <>join the waitlist and we&rsquo;ll send you a text when it&rsquo;s ready to try</>,
+      <>the free beta is launching soon</>,
+      <>join the waitlist and we&rsquo;ll text you when your spot is ready</>,
     ],
   },
 ];
