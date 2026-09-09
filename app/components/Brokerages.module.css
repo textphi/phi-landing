@@ -1,7 +1,7 @@
 .section {
   width: 100%;
   padding: clamp(4rem, 7vw, 6rem) clamp(1.25rem, 5vw, 5rem)
-    clamp(6.5rem, 13vw, 11rem);
+    clamp(4.5rem, 8vw, 7rem);
   background: #1d1d1f;
   color: #f4f4f5;
   overflow: hidden;
@@ -131,7 +131,7 @@
 @media (max-width: 620px) {
   .section {
     padding-top: 4.5rem;
-    padding-bottom: 6rem;
+    padding-bottom: 4.5rem;
   }
 
   .logos {

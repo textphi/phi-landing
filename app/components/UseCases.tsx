@@ -178,12 +178,15 @@ export default function UseCases() {
     let raf = 0;
     let last = performance.now();
     const BASE = 42; // px/s
-    const HOVER = 12; // px/s when hovered (slower, never stops)
+    const HOVER = 22; // px/s when hovered (slower, but visibly moving)
+    let speed = BASE;
 
     const loop = (now: number) => {
       const dt = Math.min(50, now - last) / 1000;
       last = now;
-      el.scrollLeft += (hoverRef.current ? HOVER : BASE) * dt;
+      const targetSpeed = hoverRef.current ? HOVER : BASE;
+      speed += (targetSpeed - speed) * Math.min(1, dt * 5);
+      el.scrollLeft += speed * dt;
       const s = seg();
       if (el.scrollLeft >= 2 * s) el.scrollLeft -= s;
       else if (el.scrollLeft < s) el.scrollLeft += s;

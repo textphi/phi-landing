@@ -106,8 +106,8 @@
   width: calc(var(--w) * 0.18);
   height: calc(var(--w) * 0.18);
   border-radius: 50%;
-  background: radial-gradient(circle at 32% 26%, #34343a, #161619 82%);
-  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: #4a4a4e;
+  border: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -116,7 +116,7 @@
   line-height: 1;
   /* The serif phi sits low in its line-box; nudge it to optical center. */
   padding-bottom: calc(var(--w) * 0.012);
-  color: rgba(255, 255, 255, 0.82);
+  color: #fff;
   font-family: var(--font-serif), Georgia, serif;
 }
 
