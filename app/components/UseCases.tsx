@@ -161,6 +161,7 @@ function UseCard({ card, hidden }: { card: Card; hidden?: boolean }) {
 
 export default function UseCases() {
   const viewportRef = useRef<HTMLDivElement>(null);
+  const hoverRef = useRef(false);
 
   useEffect(() => {
     const el = viewportRef.current;
@@ -182,7 +183,8 @@ export default function UseCases() {
     el.scrollLeft = pos;
     let lastWritten = el.scrollLeft;
 
-    const SPEED = 42; // px/s
+    const BASE_SPEED = 42; // px/s
+    const HOVER_SPEED = 22; // px/s while hovered
     const HOLD_AFTER_INPUT = 1500; // ms to leave native scroll/momentum alone
     let idleUntil = 0;
     const holdOff = () => {
@@ -194,6 +196,7 @@ export default function UseCases() {
 
     let raf = 0;
     let last = performance.now();
+    let speed = BASE_SPEED;
 
     const frame = (now: number) => {
       const dt = Math.min(64, now - last) / 1000;
@@ -216,7 +219,11 @@ export default function UseCases() {
         // Auto-advance. Adopt the user's position if they moved it since our
         // last write, then step forward and keep pos within the middle set.
         if (Math.abs(el.scrollLeft - lastWritten) > 1.5) pos = el.scrollLeft;
-        if (!prefersReduced) pos += SPEED * dt;
+        if (!prefersReduced) {
+          const targetSpeed = hoverRef.current ? HOVER_SPEED : BASE_SPEED;
+          speed += (targetSpeed - speed) * Math.min(1, dt * 5);
+          pos += speed * dt;
+        }
         if (pos >= seg * 2) pos -= seg;
         else if (pos < seg) pos += seg;
         el.scrollLeft = pos;
@@ -244,7 +251,12 @@ export default function UseCases() {
         <p className={styles.sub}>Just text Phi.</p>
       </div>
 
-      <div className={styles.marquee} ref={viewportRef}>
+      <div
+        className={styles.marquee}
+        ref={viewportRef}
+        onMouseEnter={() => (hoverRef.current = true)}
+        onMouseLeave={() => (hoverRef.current = false)}
+      >
         {/* Three identical sets: auto-advances, drags either way, wraps seamlessly. */}
         <div className={styles.track}>
           {CARDS.map((card, i) => (

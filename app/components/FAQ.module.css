@@ -1,7 +1,7 @@
 .section {
   width: 100%;
-  padding: clamp(4.5rem, 8vw, 7rem) clamp(1.25rem, 5vw, 5rem)
-    clamp(7rem, 12vw, 11rem);
+  padding: clamp(3.25rem, 5vw, 4.75rem) clamp(1.25rem, 5vw, 5rem)
+    clamp(3rem, 5vw, 4.5rem);
   overflow: hidden;
   background: #1d1d1f;
   color: #f4f4f5;
@@ -38,7 +38,7 @@
 }
 
 .thread + .thread {
-  margin-top: clamp(3.75rem, 6vw, 5.5rem);
+  margin-top: clamp(2.25rem, 3.5vw, 3.25rem);
 }
 
 .questionGroup {
@@ -58,7 +58,7 @@
 
 .question {
   padding: 0.68rem 0.95rem;
-  border-radius: 20px 20px 6px 20px;
+  border-radius: 20px;
   background: #0a84ff;
   color: #fff;
   font-family: var(--font-sans);
@@ -89,10 +89,10 @@
   flex: 0 0 32px;
   display: grid;
   place-items: center;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 0;
   border-radius: 50%;
-  background: radial-gradient(circle at 32% 26%, #44444a, #2c2c30 82%);
-  color: #dedee1;
+  background: #4a4a4e;
+  color: #fff;
   font-family: var(--font-serif), Georgia, serif;
   font-size: 1.05rem;
   line-height: 1;
@@ -116,7 +116,7 @@
   width: fit-content;
   max-width: 100%;
   padding: 0.62rem 0.9rem;
-  border-radius: 18px 18px 18px 6px;
+  border-radius: 18px;
   background: #38383b;
   color: #f2f2f3;
   font-family: var(--font-sans);
@@ -127,8 +127,8 @@
 
 @media (max-width: 720px) {
   .section {
-    padding-top: 4rem;
-    padding-bottom: 7rem;
+    padding-top: 3.25rem;
+    padding-bottom: 3.5rem;
   }
 
   .threads {
@@ -136,7 +136,7 @@
   }
 
   .thread + .thread {
-    margin-top: 3.75rem;
+    margin-top: 2.5rem;
   }
 
   .questionGroup {
