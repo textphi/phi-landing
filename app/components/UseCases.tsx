@@ -44,12 +44,12 @@ const CARDS: Card[] = [
     convo: [
       {
         side: "in",
-        text: "TSLA just dropped 7%. trump posted about new EV tariffs 20 min ago + it looks related",
+        text: "trump just tweeted this. could hit NVDA, and maybe GM too given the tariff angle",
         link: "truthsocial.com/@realDonaldTrump/...",
       },
-      { side: "in", text: "you've also got $2.6k in GM with similar exposure" },
-      { side: "out", text: "lmk if GM drops 5% too" },
-      { side: "in", text: "got you. watching it" },
+      { side: "in", text: "you've got $2.6k in GM with similar exposure" },
+      { side: "out", text: "lmk if either drops 5%" },
+      { side: "in", text: "got you. watching them" },
     ],
   },
   {
