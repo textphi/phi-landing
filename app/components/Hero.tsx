@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import styles from "./Hero.module.css";
+import HeroVideo from "./HeroVideo";
 import PhoneMockup from "./PhoneMockup";
 
 type SubmissionState = "idle" | "submitting" | "error";
@@ -69,17 +70,7 @@ export default function Hero() {
 
   return (
     <section className={styles.hero}>
-      <video
-        className={styles.video}
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="auto"
-        aria-hidden="true"
-      >
-        <source src="/hero_video.mp4" type="video/mp4" />
-      </video>
+      <HeroVideo />
 
       <div className={styles.overlay} aria-hidden="true" />
 

@@ -17,6 +17,12 @@
   --font-sans: system-ui, -apple-system, sans-serif;
 }
 
+html {
+  color-scheme: dark;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
 html,
 body {
   background-color: var(--bg);
@@ -28,4 +34,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  /* Guard against any single element's sub-pixel width forcing a sideways
+     scrollbar on mobile; every section already clips its own overflow. */
+  overflow-x: hidden;
 }

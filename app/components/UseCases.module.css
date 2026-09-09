@@ -31,12 +31,15 @@
   color: #a6a7ab;
 }
 
-/* ---------- Marquee (JS-driven scroll, seamless + manually scrollable) ---------- */
+/* ---------- Marquee: native scroll container, auto-advanced by JS ---------- */
 .marquee {
   overflow-x: auto;
   overflow-y: hidden;
   scrollbar-width: none;
   -ms-overflow-style: none;
+  /* Horizontal drags scroll the strip; vertical gestures scroll the page.
+     contain stops a drag past the end from triggering page bounce / back-swipe. */
+  touch-action: pan-x;
   overscroll-behavior-x: contain;
   /* Soft fade at both viewport edges. */
   -webkit-mask-image: linear-gradient(
@@ -196,12 +199,12 @@
 
 @media (max-width: 600px) {
   .card {
-    width: clamp(270px, 80vw, 330px);
-    height: 21.5rem;
+    width: clamp(280px, 82vw, 340px);
+    height: 22.5rem;
   }
   .cardHeader {
-    font-size: 1.4rem;
-    margin-bottom: 20px;
+    font-size: clamp(1.3rem, 5.5vw, 1.55rem);
+    margin-bottom: 18px;
     white-space: normal;
   }
 }
