@@ -31,12 +31,15 @@
   color: #a6a7ab;
 }
 
-/* ---------- Marquee (JS-driven scroll, seamless + manually scrollable) ---------- */
+/* ---------- Marquee: native scroll container, auto-advanced by JS ---------- */
 .marquee {
   overflow-x: auto;
   overflow-y: hidden;
   scrollbar-width: none;
   -ms-overflow-style: none;
+  /* Horizontal drags scroll the strip; vertical gestures scroll the page.
+     contain stops a drag past the end from triggering page bounce / back-swipe. */
+  touch-action: pan-x;
   overscroll-behavior-x: contain;
   /* Soft fade at both viewport edges. */
   -webkit-mask-image: linear-gradient(

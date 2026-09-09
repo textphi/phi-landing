@@ -160,37 +160,79 @@ function UseCard({ card, hidden }: { card: Card; hidden?: boolean }) {
 }
 
 export default function UseCases() {
-  const marqueeRef = useRef<HTMLDivElement>(null);
-  const hoverRef = useRef(false);
+  const viewportRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const el = marqueeRef.current;
+    const el = viewportRef.current;
     if (!el) return;
 
-    // Three copies of the set: keep the scroll position inside the middle copy
-    // so the user can drag/scroll either direction and it wraps seamlessly.
-    const seg = () => el.scrollWidth / 3;
-    el.scrollLeft = seg();
+    const prefersReduced = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
 
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduce) return; // no auto-scroll; manual swipe still works
+    // Three identical sets are rendered. We keep the scroll position inside the
+    // middle set so a drag in either direction always has a full set of runway
+    // before we wrap — and because the sets are identical, the wrap is invisible.
+    const setWidth = () => el.scrollWidth / 3;
+
+    // Position is tracked in JS, not read back from the DOM each frame: iOS
+    // Safari truncates element.scrollLeft to an integer, so sub-pixel
+    // per-frame increments (~0.7px) would round to zero and never advance.
+    let pos = setWidth();
+    el.scrollLeft = pos;
+    let lastWritten = el.scrollLeft;
+
+    const SPEED = 42; // px/s
+    const HOLD_AFTER_INPUT = 1500; // ms to leave native scroll/momentum alone
+    let idleUntil = 0;
+    const holdOff = () => {
+      idleUntil = performance.now() + HOLD_AFTER_INPUT;
+    };
+    el.addEventListener("pointerdown", holdOff);
+    el.addEventListener("wheel", holdOff, { passive: true });
+    el.addEventListener("touchmove", holdOff, { passive: true });
 
     let raf = 0;
     let last = performance.now();
-    const BASE = 42; // px/s
-    const HOVER = 12; // px/s when hovered (slower, never stops)
 
-    const loop = (now: number) => {
-      const dt = Math.min(50, now - last) / 1000;
+    const frame = (now: number) => {
+      const dt = Math.min(64, now - last) / 1000;
       last = now;
-      el.scrollLeft += (hoverRef.current ? HOVER : BASE) * dt;
-      const s = seg();
-      if (el.scrollLeft >= 2 * s) el.scrollLeft -= s;
-      else if (el.scrollLeft < s) el.scrollLeft += s;
-      raf = requestAnimationFrame(loop);
+      const seg = setWidth();
+
+      if (now <= idleUntil) {
+        // Hands off: let native scrolling (and iOS momentum) run untouched.
+        // Only nudge by a whole set if we're about to run out of track.
+        pos = el.scrollLeft;
+        if (pos < seg * 0.5) {
+          pos += seg;
+          el.scrollLeft = pos;
+        } else if (pos > seg * 2.5) {
+          pos -= seg;
+          el.scrollLeft = pos;
+        }
+        lastWritten = el.scrollLeft;
+      } else {
+        // Auto-advance. Adopt the user's position if they moved it since our
+        // last write, then step forward and keep pos within the middle set.
+        if (Math.abs(el.scrollLeft - lastWritten) > 1.5) pos = el.scrollLeft;
+        if (!prefersReduced) pos += SPEED * dt;
+        if (pos >= seg * 2) pos -= seg;
+        else if (pos < seg) pos += seg;
+        el.scrollLeft = pos;
+        lastWritten = el.scrollLeft;
+      }
+
+      raf = requestAnimationFrame(frame);
     };
-    raf = requestAnimationFrame(loop);
-    return () => cancelAnimationFrame(raf);
+    raf = requestAnimationFrame(frame);
+
+    return () => {
+      cancelAnimationFrame(raf);
+      el.removeEventListener("pointerdown", holdOff);
+      el.removeEventListener("wheel", holdOff);
+      el.removeEventListener("touchmove", holdOff);
+    };
   }, []);
 
   return (
@@ -202,17 +244,12 @@ export default function UseCases() {
         <p className={styles.sub}>Just text Phi.</p>
       </div>
 
-      <div
-        className={styles.marquee}
-        ref={marqueeRef}
-        onMouseEnter={() => (hoverRef.current = true)}
-        onMouseLeave={() => (hoverRef.current = false)}
-      >
+      <div className={styles.marquee} ref={viewportRef}>
+        {/* Three identical sets: auto-advances, drags either way, wraps seamlessly. */}
         <div className={styles.track}>
           {CARDS.map((card, i) => (
             <UseCard key={`a-${i}`} card={card} />
           ))}
-          {/* Two duplicate sets for a seamless, bi-directional loop */}
           {CARDS.map((card, i) => (
             <UseCard key={`b-${i}`} card={card} hidden />
           ))}
