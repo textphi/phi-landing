@@ -44,9 +44,8 @@
   justify-content: center;
 }
 
-/* ---------- Boxes (sources + outputs) ---------- */
-.sourcesBox,
-.outputsBox {
+/* ---------- Left: sources ---------- */
+.sourcesBox {
   flex: 1 1 0;
   max-width: 350px;
   height: 360px;
@@ -57,7 +56,6 @@
   overflow: hidden;
 }
 
-/* ---------- Left: sources ---------- */
 .sources {
   position: relative;
   height: 100%;
@@ -138,14 +136,15 @@
   text-overflow: ellipsis;
 }
 
-/* ---------- Arrows connecting the boxes to the engine ---------- */
+/* ---------- Arrows ---------- */
 .arrow {
-  flex: 0 0 clamp(40px, 5vw, 92px);
+  flex: 0 0 clamp(36px, 4.5vw, 84px);
   height: 22px;
   position: relative;
   display: flex;
   align-items: center;
 }
+
 
 .wire {
   position: relative;
@@ -156,6 +155,7 @@
   overflow: hidden;
 }
 
+/* Only the leg that is actually carrying something animates. */
 .wire::after {
   content: "";
   position: absolute;
@@ -166,9 +166,14 @@
   background: linear-gradient(
     90deg,
     transparent,
-    #4da3ff 55%,
+    rgba(255, 255, 255, 0.72) 55%,
     transparent
   );
+  opacity: 0;
+}
+
+.wire[data-active="true"]::after {
+  opacity: 1;
   animation: wireflow 1.9s linear infinite;
 }
 
@@ -190,108 +195,85 @@
   height: 0;
   border-top: 5px solid transparent;
   border-bottom: 5px solid transparent;
-  border-left: 7px solid rgba(120, 180, 255, 0.7);
+  border-left: 7px solid rgba(255, 255, 255, 0.45);
 }
 
-/* ---------- Center: Phi engine ---------- */
+/* ---------- Middle: Phi in a determinate loader ---------- */
 .engineWrap {
   flex: 0 0 auto;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.glow {
-  position: absolute;
-  width: 240px;
-  height: 240px;
-  border-radius: 50%;
-  background: radial-gradient(
-    circle,
-    rgba(20, 140, 255, 0.24) 0%,
-    rgba(20, 140, 255, 0) 68%
-  );
-  filter: blur(4px);
-  animation: breathe 5s ease-in-out infinite;
-  pointer-events: none;
-}
-
-@keyframes breathe {
-  0%,
-  100% {
-    transform: scale(0.9);
-    opacity: 0.6;
-  }
-  50% {
-    transform: scale(1.08);
-    opacity: 0.95;
-  }
-}
-
-.engine {
-  position: relative;
-  width: clamp(180px, 19vw, 224px);
-  padding: 28px 22px 24px;
-  border-radius: 22px;
-  border: 1px solid rgba(10, 132, 255, 0.3);
-  background: linear-gradient(180deg, #1b1d22 0%, #141519 100%);
-  box-shadow: 0 24px 60px -22px rgba(0, 0, 0, 0.7);
   display: flex;
   flex-direction: column;
   align-items: center;
-  overflow: hidden;
-  text-align: center;
+  gap: 18px;
 }
 
-.scan {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 55%;
+.ring {
+  position: relative;
+  width: clamp(132px, 15vw, 168px);
+  aspect-ratio: 1;
+}
+
+.ringSvg {
+  width: 100%;
   height: 100%;
-  background: linear-gradient(
-    100deg,
-    transparent,
-    rgba(60, 160, 255, 0.14),
-    transparent
-  );
-  transform: translateX(-120%);
-  animation: sweep 3.4s ease-in-out infinite;
-  pointer-events: none;
+  display: block;
+  /* Start the fill at 12 o'clock and run clockwise. */
+  transform: rotate(-90deg);
 }
 
-@keyframes sweep {
-  0% {
-    transform: translateX(-120%);
-  }
-  60%,
-  100% {
-    transform: translateX(320%);
-  }
+.ringTrack,
+.ringFill {
+  fill: none;
+  stroke-width: 2.5;
+}
+
+.ringTrack {
+  stroke: rgba(255, 255, 255, 0.1);
+}
+
+.ringFill {
+  stroke: #f5f6f8;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.1s linear;
+}
+
+.ringCore {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
 }
 
 .phiMark {
   font-family: var(--font-serif), Georgia, serif;
-  font-size: 2.6rem;
+  font-size: clamp(2.1rem, 4vw, 2.6rem);
   line-height: 1;
-  color: #eaf3ff;
-  text-shadow: 0 0 22px rgba(20, 140, 255, 0.55);
+  color: #f0f2f5;
+}
+
+.percent {
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+  color: #8a8c92;
 }
 
 .statusLine {
-  margin-top: 16px;
-  display: flex;
-  align-items: baseline;
-  gap: 2px;
   min-height: 1.1em;
   font-family: var(--font-sans);
-  font-size: 0.82rem;
-  color: #cfd3da;
+  font-size: 0.8rem;
+  color: #a6a7ab;
+  text-align: center;
 }
 
 .statusText {
-  animation: textIn 0.5s ease;
+  display: inline-block;
+  animation: textIn 0.45s ease;
 }
 
 @keyframes textIn {
@@ -305,146 +287,261 @@
   }
 }
 
-.dots {
-  display: inline-flex;
-  gap: 2px;
-}
-.dots i {
-  width: 3px;
-  height: 3px;
-  border-radius: 50%;
-  background: #4da3ff;
-  animation: dotb 1.4s infinite ease-in-out both;
-}
-.dots i:nth-child(2) {
-  animation-delay: 0.2s;
-}
-.dots i:nth-child(3) {
-  animation-delay: 0.4s;
-}
-@keyframes dotb {
-  0%,
-  80%,
-  100% {
-    opacity: 0.2;
-  }
-  40% {
-    opacity: 1;
-  }
-}
-
-.bars {
-  margin-top: 18px;
-  display: flex;
-  align-items: flex-end;
-  gap: 4px;
-  height: 24px;
-}
-.bars span {
-  width: 4px;
-  border-radius: 2px;
-  background: linear-gradient(180deg, #4da3ff, #0a84ff);
-  animation: eq 1.2s ease-in-out infinite;
-  animation-delay: calc(var(--b) * -0.15s);
-  height: 40%;
-}
-@keyframes eq {
-  0%,
-  100% {
-    height: 30%;
-    opacity: 0.55;
-  }
-  50% {
-    height: 100%;
-    opacity: 1;
-  }
-}
-
-/* ---------- Right: outputs ---------- */
-.outputsBox {
+/* ---------- Right: the messages that land ---------- */
+.outbox {
+  flex: 1 1 0;
+  max-width: 350px;
+  min-height: 360px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 4px 18px;
+  gap: 16px;
+  padding-left: 4px;
 }
 
-.output {
-  padding: 14px 0;
-  animation: outIn 0.6s ease both;
-}
-.output:not(:first-child) {
-  border-top: 1px solid rgba(255, 255, 255, 0.07);
-}
-
-@keyframes outIn {
-  from {
-    opacity: 0;
-    transform: translateX(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-.outTag {
-  font-family: var(--font-sans);
-  font-size: 0.62rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: #4da3ff;
-}
-
-.outValue {
-  margin-top: 5px;
-  font-family: var(--font-sans);
-  font-size: 0.9rem;
-  color: #f0f0f2;
-  line-height: 1.35;
-}
-
-.outLabel {
-  color: #83858b;
-}
-
-.outStatus {
-  margin-top: 8px;
+/* Out of flow: see the note in Engine.tsx about keeping the arrows level. */
+.sender {
+  position: absolute;
+  left: 0;
+  bottom: 100%;
+  margin-bottom: 11px;
   display: flex;
   align-items: center;
   gap: 7px;
   font-family: var(--font-sans);
-  font-size: 0.72rem;
-  color: #a6a7ab;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: #8a8c92;
 }
 
-.statusDot {
-  width: 7px;
-  height: 7px;
+.senderMark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
   border-radius: 50%;
-  flex-shrink: 0;
+  background: #2f3238;
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: 0.72rem;
+  line-height: 1;
+  color: #e9ebef;
 }
-.dotLive {
-  background: #0a84ff;
-  animation: pulse 1.8s ease-out infinite;
+
+/*
+ * Centring the line box is not the same as centring the glyph: this phi's
+ * descender pulls its ink low and its side bearings pull it left. Measured
+ * offsets, applied so the mark sits in the middle of the disc.
+ */
+.senderGlyph {
+  display: block;
+  font-style: normal;
+  transform: translate(0.45px, -1.38px);
 }
-.dotDone {
-  background: #6f727a;
+
+.thread {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  /* Wide enough that each bubble reads as a group with its own source line. */
+  gap: 30px;
 }
-@keyframes pulse {
-  0% {
-    box-shadow: 0 0 0 0 rgba(10, 132, 255, 0.5);
-  }
-  70% {
-    box-shadow: 0 0 0 7px rgba(10, 132, 255, 0);
-  }
+
+.message {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 7px;
+}
+
+/* Phi is composing while the loader runs. */
+.typing {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 12px 14px;
+  border-radius: 16px;
+  background: #2c2e33;
+  transform-origin: left bottom;
+  opacity: 0;
+  transform: scale(0.6);
+  transition: opacity 0.25s ease,
+    transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.typing[data-in="true"] {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.typing i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #8a8c92;
+  animation: typing 1.3s ease-in-out infinite both;
+}
+
+.typing i:nth-child(2) {
+  animation-delay: 0.18s;
+}
+.typing i:nth-child(3) {
+  animation-delay: 0.36s;
+}
+
+@keyframes typing {
+  0%,
+  70%,
   100% {
-    box-shadow: 0 0 0 0 rgba(10, 132, 255, 0);
+    opacity: 0.3;
+    transform: translateY(0);
   }
+  35% {
+    opacity: 1;
+    transform: translateY(-2px);
+  }
+}
+
+/* Matches the bubble language used in the chat sections. */
+.bubble {
+  position: relative;
+  max-width: 100%;
+  padding: 9px 13px;
+  border-radius: 16px;
+  background: #2c2e33;
+  color: #f2f2f2;
+  font-family: var(--font-sans);
+  font-size: 0.86rem;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  transform-origin: left bottom;
+  opacity: 0;
+  transform: scale(0.5) translateY(10px);
+  transition: opacity 0.26s ease,
+    transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.bubble[data-in="true"] {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+/* The ripple that goes out with the message, iMessage-style. */
+.ripple {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 1.5px solid rgba(255, 255, 255, 0.4);
+  pointer-events: none;
+  animation: ripple 0.85s cubic-bezier(0.2, 0.7, 0.3, 1) forwards;
+}
+
+.ripple2 {
+  animation-delay: 0.14s;
+  border-color: rgba(255, 255, 255, 0.24);
+}
+
+@keyframes ripple {
+  from {
+    transform: scale(1);
+    opacity: 0.85;
+  }
+  to {
+    transform: scale(1.14);
+    opacity: 0;
+  }
+}
+
+/* The signal this message came from, so the chain stays traceable. */
+.trace {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding-left: 4px;
+  min-width: 0;
+  opacity: 0;
+  transform: translateY(-3px);
+  transition: opacity 0.4s ease 0.18s, transform 0.4s ease 0.18s;
+}
+
+.trace[data-in="true"] {
+  opacity: 1;
+  transform: none;
+}
+
+.traceIcon {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.traceSrc {
+  font-family: var(--font-sans);
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #7c7f86;
+  white-space: nowrap;
+}
+
+.traceItem {
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  color: #63666d;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ---------- Source badges ---------- */
+.chipIcon > span,
+.traceIcon > span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.16),
+    0 1px 3px rgba(0, 0, 0, 0.22);
+}
+
+.chipIcon > span {
+  width: 22px;
+  height: 22px;
+}
+.chipIcon > span svg {
+  width: 16px;
+  height: 16px;
+  display: block;
+}
+
+.traceIcon > span {
+  width: 14px;
+  height: 14px;
+}
+.traceIcon > span svg {
+  width: 10px;
+  height: 10px;
+  display: block;
+}
+
+/* Flags are the badge rather than a mark on it, so they run to the edge. */
+.chipIcon > span svg[data-bleed],
+.traceIcon > span svg[data-bleed] {
+  width: 100%;
+  height: 100%;
 }
 
 /* ---------- Responsive ---------- */
-@media (max-width: 860px) {
+@media (max-width: 900px) {
   .flow {
     flex-direction: column;
     gap: 1.5rem;
@@ -461,7 +558,14 @@
   .wire::after {
     width: 100%;
     height: 45%;
-    background: linear-gradient(180deg, transparent, #4da3ff 55%, transparent);
+    background: linear-gradient(
+      180deg,
+      transparent,
+      rgba(255, 255, 255, 0.72) 55%,
+      transparent
+    );
+  }
+  .wire[data-active="true"]::after {
     animation: wireflowV 1.9s linear infinite;
   }
   @keyframes wireflowV {
@@ -480,11 +584,11 @@
     transform: translateX(-50%);
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
-    border-top: 7px solid rgba(120, 180, 255, 0.7);
+    border-top: 7px solid rgba(255, 255, 255, 0.45);
     border-bottom: 0;
   }
   .sourcesBox,
-  .outputsBox {
+  .outbox {
     width: 100%;
     max-width: 440px;
     flex: 0 0 auto;
@@ -492,51 +596,33 @@
   .sourcesBox {
     height: 190px;
   }
-  .outputsBox {
-    height: auto;
+  .outbox {
+    min-height: 0;
+    padding-left: 0;
+    /* Room for the out-of-flow sender label above the first bubble. */
+    padding-top: 30px;
+  }
+  /* Full-bleed bubbles stop reading as messages on a narrow screen. */
+  .bubble {
+    max-width: 84%;
   }
 }
 
 /* ---------- Reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
   .sourcesTrack,
-  .glow,
-  .scan,
   .statusText,
-  .dots i,
-  .bars span,
-  .output,
-  .dotLive,
-  .wire::after {
+  .wire[data-active="true"]::after,
+  .typing i {
     animation: none;
   }
-  .scan {
+  .ripple,
+  .typing {
     display: none;
   }
+  .bubble,
+  .trace,
+  .ringFill {
+    transition: none;
+  }
 }
-
-
-/* Company logos become the primary mark for company-specific events. */
-.companyMark {
-  display: inline-flex;
-  width: 22px;
-  height: 22px;
-  align-items: center;
-  justify-content: center;
-  color: #b9bbc1;
-}
-.companyMark svg { width: 100%; height: 100%; display: block; }
-.companyMark span { font-size: 1rem; font-weight: 800; line-height: 1; }
-/* Branded source and company marks are complete, compact circular badges. */
-.chipIcon > span {
-  display: inline-flex;
-  width: 22px;
-  height: 22px;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.16), 0 1px 3px rgba(0, 0, 0, 0.22);
-}
-.chipIcon > span svg { width: 16px; height: 16px; }
-.chipIcon > span.companyMark { color: #fff; }
-.chipIcon > span.companyMark svg { width: 14px; height: 14px; }
