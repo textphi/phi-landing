@@ -34,6 +34,9 @@
   display: flex;
   flex-direction: column;
   color: #fff;
+  /* Self-contained: don't inherit text alignment from wherever this is placed
+     (the hero centers its copy on mobile). Bubbles read as a real thread. */
+  text-align: left;
 }
 
 /* ---------- Status bar ---------- */
@@ -396,7 +399,15 @@
 
 /* ---------- Responsive ---------- */
 @media (max-width: 900px) {
+  /* Stacked under the headline now: cap against svh so the phone shrinks on
+     short screens and never crowds out the copy above it. */
   .phone {
-    --w: min(84vw, 380px);
+    --w: min(76vw, 340px, 48svh);
+  }
+}
+
+@media (max-width: 400px) {
+  .phone {
+    --w: min(82vw, 300px, 46svh);
   }
 }

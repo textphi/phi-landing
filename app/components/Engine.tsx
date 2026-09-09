@@ -87,7 +87,7 @@ function Arrow() {
   return (
     <div className={styles.arrow} aria-hidden="true">
       <span className={styles.wire} />
-      <span className={styles.head} />
+      <span className={styles.arrowHead} />
     </div>
   );
 }
