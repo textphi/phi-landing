@@ -181,7 +181,7 @@
   }
 }
 
-.head {
+.arrowHead {
   position: absolute;
   right: -1px;
   top: 50%;
@@ -472,7 +472,7 @@
       transform: translateY(340%);
     }
   }
-  .head {
+  .arrowHead {
     right: auto;
     left: 50%;
     top: auto;

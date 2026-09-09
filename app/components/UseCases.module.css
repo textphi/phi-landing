@@ -196,12 +196,12 @@
 
 @media (max-width: 600px) {
   .card {
-    width: clamp(270px, 80vw, 330px);
-    height: 21.5rem;
+    width: clamp(280px, 82vw, 340px);
+    height: 22.5rem;
   }
   .cardHeader {
-    font-size: 1.4rem;
-    margin-bottom: 20px;
+    font-size: clamp(1.3rem, 5.5vw, 1.55rem);
+    margin-bottom: 18px;
     white-space: normal;
   }
 }
