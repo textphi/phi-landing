@@ -14,14 +14,6 @@ type Card = { header: string; convo: Row[] };
 
 const CARDS: Card[] = [
   {
-    header: "Mirror public trades",
-    convo: [
-      { side: "out", text: "mirror pelosi's trades with 200 bucks" },
-      { side: "in", text: "done. shadowing her disclosures with $200 from here" },
-      { side: "in", text: "i'll keep you posted on the orders to place" },
-    ],
-  },
-  {
     header: "Deep research",
     convo: [
       { side: "out", text: "dig into MU vs SNDK for me" },
@@ -37,6 +29,14 @@ const CARDS: Card[] = [
         side: "in",
         text: "btw, you're already 22% exposed to memory. anything else you wanna dig into?",
       },
+    ],
+  },
+  {
+    header: "Mirror public trades",
+    convo: [
+      { side: "out", text: "mirror pelosi's trades with 200 bucks" },
+      { side: "in", text: "done. shadowing her disclosures with $200 from here" },
+      { side: "in", text: "i'll keep you posted on the orders to place" },
     ],
   },
   {
