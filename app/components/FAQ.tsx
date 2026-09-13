@@ -70,7 +70,7 @@ const FAQ_ITEMS: FAQItem[] = [
   {
     question: <>what&rsquo;s next for phi?</>,
     answers: [
-      <>the free beta is launching soon</>,
+      <>the private beta is rolling out now</>,
       <>join the waitlist and we&rsquo;ll text you when your spot is ready</>,
     ],
   },
