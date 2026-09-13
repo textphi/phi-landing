@@ -95,11 +95,16 @@ export default function Hero() {
           </p>
 
           {joined ? (
-            <p className={styles.joinedNote}>You&rsquo;re on the waitlist!</p>
+            <p className={styles.joinedNote}>
+              You&rsquo;re on the list. We&rsquo;ll text you when your beta spot is ready.
+            </p>
           ) : (
-            <button className={styles.cta} type="button" onClick={() => setWaitlistOpen(true)}>
-              Join Waitlist
-            </button>
+            <>
+              <button className={styles.cta} type="button" onClick={() => setWaitlistOpen(true)}>
+                Join Waitlist
+              </button>
+              <p className={styles.betaNote}>Private beta &middot; rolling access</p>
+            </>
           )}
         </div>
 
