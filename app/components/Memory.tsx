@@ -56,7 +56,7 @@ export default function Memory() {
   return (
     <section id="memory" className={styles.section}>
       <div className={styles.head}>
-        <h2 className={styles.heading}>It remembers everything that matters.</h2>
+        <h2 className={styles.heading}>Phi remembers everything that matters.</h2>
         <p className={styles.sub}>
           Over time, Phi builds a model of you as an investor, not just a record
           of your portfolio.
