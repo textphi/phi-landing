@@ -16,14 +16,14 @@ const SOURCES: { src: string; text: string; logo: string }[] = [
   { src: "SEC", text: "MU 10-Q filed", logo: "SEC" },
   { src: "Yahoo Finance", text: "NVDA -6.2% today", logo: "Yahoo Finance" },
   { src: "Reddit", text: "r/stocks SNDK discussion spiking", logo: "Reddit" },
-  { src: "X", text: "semiconductor export limits trending", logo: "X" },
+  { src: "X", text: "Semiconductor export limits trending", logo: "X" },
   { src: "Earnings", text: "MSFT Q4 call transcript available", logo: "Microsoft" },
   { src: "Congress", text: "Pelosi new transaction disclosed", logo: "Congress" },
   { src: "News", text: "Reuters - AI chip restrictions", logo: "Reuters" },
   { src: "Market data", text: "TSLA volume 2.4x average", logo: "Tesla" },
   { src: "Your portfolio", text: "18% NVDA", logo: "Nvidia" },
-  { src: "Your rule", text: "max position 15%", logo: "Your rule" },
-  { src: "Paper portfolio", text: "hedge experiment #3", logo: "Paper portfolio" },
+  { src: "Your rule", text: "Max position 15%", logo: "Your rule" },
+  { src: "Paper portfolio", text: "Hedge experiment #3", logo: "Paper portfolio" },
 ];
 
 /** What the loader is doing, keyed to how far through the pass it is. */

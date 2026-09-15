@@ -16,6 +16,14 @@ const FAQ_ITEMS: FAQItem[] = [
     ],
   },
   {
+    question: <>how is phi different from a chatbot like chatgpt?</>,
+    answers: [
+      <>a chatbot like chatgpt waits for you to ask. phi connects to your portfolio and texts you first on what moves your money, earnings, news, big moves, and what it means for you</>,
+      <>it&rsquo;s trained to think like an equity analyst, with access to research and data a general chatbot can&rsquo;t touch</>,
+      <>and it does things chatgpt can&rsquo;t, like spinning up paper trades to test an idea, and it remembers everything across your holdings and research</>,
+    ],
+  },
+  {
     question: <>how does phi understand my investments?</>,
     answers: [
       <>you connect your brokerage with read only access</>,
@@ -28,14 +36,6 @@ const FAQ_ITEMS: FAQItem[] = [
       <>not right now, phi is read only</>,
       <>it can help you research a trade, test it in a paper portfolio, or tell you exactly what to place</>,
       <>you stay in control of execution</>,
-    ],
-  },
-  {
-    question: <>how is phi different from a chatbot like chatgpt?</>,
-    answers: [
-      <>a chatbot like chatgpt waits for you to ask. phi connects to your portfolio and texts you first on what moves your money, earnings, news, big moves, and what it means for you</>,
-      <>it&rsquo;s trained to think like an equity analyst, with access to research and data a general chatbot can&rsquo;t touch</>,
-      <>and it does things chatgpt can&rsquo;t, like spinning up paper trades to test an idea, and it remembers everything across your holdings and research</>,
     ],
   },
   {
