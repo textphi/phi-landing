@@ -12,7 +12,7 @@ import styles from "./Memory.module.css";
  */
 const MEMORIES: { label: string; text: string }[] = [
   { label: "your rule", text: "Don’t let any single position get above 20%" },
-  { label: "your thesis", text: "You’re bullish on AI infrastructure for the next 5 years" },
+  { label: "your thesis", text: "You’re bullish on AI infrastructure long term" },
   { label: "your watchlist", text: "You keep checking AMD but haven’t bought yet" },
   { label: "your pattern", text: "You tend to sell too quickly after sharp drops" },
   { label: "your life", text: "Job interview on Thursday" },
