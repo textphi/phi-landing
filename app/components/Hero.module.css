@@ -280,6 +280,9 @@
   transition: border-color 180ms ease, box-shadow 180ms ease;
 }
 
+/* Second (and later) field in the stack gets breathing room from the one above. */
+.phoneInput + .fieldLabel { margin-top: 0.9rem; }
+
 .phoneInput::placeholder { color: #74777f; }
 .phoneInput:focus {
   border-color: #777b86;
