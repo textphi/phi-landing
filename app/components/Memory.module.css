@@ -1,0 +1,393 @@
+/* Mirrors the engine section's dark field and heading scale. The top padding
+ * is trimmed so the gap above this section (engine's larger bottom padding +
+ * this top) matches the gap above the engine (use-cases bottom + engine top). */
+.section {
+  position: relative;
+  background: #1d1d1f;
+  overflow: hidden;
+  padding: clamp(3.5rem, 8vh, 6rem) clamp(1.25rem, 5vw, 5rem) clamp(4.5rem, 10vh, 8rem);
+}
+
+/* ---------- Heading ---------- */
+.head {
+  max-width: 46rem;
+  margin: 0 auto clamp(2.5rem, 5vh, 3.5rem);
+  text-align: center;
+}
+
+.heading {
+  font-family: var(--font-serif);
+  font-weight: 360;
+  font-size: clamp(1.9rem, 4vw, 3rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: #f4f4f5;
+  text-wrap: balance;
+}
+
+.sub {
+  margin: 1rem auto 0;
+  max-width: 34rem;
+  font-family: var(--font-sans);
+  font-size: clamp(1rem, 1.5vw, 1.15rem);
+  line-height: 1.5;
+  color: #a6a7ab;
+}
+
+/* ---------- Flow container ---------- */
+.card {
+  position: relative;
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+.flow {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: clamp(6px, 1.5vw, 22px);
+}
+
+/* ---------- Left: the pile of remembered context ---------- */
+.memories {
+  flex: 1 1 0;
+  max-width: 360px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Entrance lives on the outer node; the drift lives on the inner one, so the
+ * two transforms never fight each other. */
+.memory {
+  position: relative;
+  opacity: 0;
+  transform: translateY(10px) scale(0.98);
+  transition: opacity 0.55s ease,
+    transform 0.55s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition-delay: calc(var(--i) * 0.1s);
+}
+
+.flow[data-visible="true"] .memory {
+  opacity: 1;
+  transform: none;
+}
+
+.memInner {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 11px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: #232427;
+  box-shadow: 0 22px 55px -40px rgba(0, 0, 0, 0.8);
+  animation: drift 7s ease-in-out infinite;
+  animation-delay: calc(var(--i) * -1.3s);
+}
+
+@keyframes drift {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+/* A small "stored" marker rather than an icon, to stay clear of a brainy look. */
+.memDot {
+  width: 7px;
+  height: 7px;
+  margin-top: 5px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: #c9cbd0;
+  animation: dot 3s ease-in-out infinite;
+  animation-delay: calc(var(--i) * -0.6s);
+}
+
+@keyframes dot {
+  0%,
+  100% {
+    opacity: 0.55;
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+  }
+  50% {
+    opacity: 1;
+    box-shadow: 0 0 8px 1px rgba(255, 255, 255, 0.28);
+  }
+}
+
+.memBody {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.memLabel {
+  font-family: var(--font-sans);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #8a8c92;
+}
+
+.memText {
+  font-family: var(--font-sans);
+  font-size: 0.84rem;
+  line-height: 1.35;
+  color: #e6e7ea;
+}
+
+/* ---------- Middle: converging lines ---------- */
+.converge {
+  flex: 0 0 clamp(64px, 9vw, 150px);
+  position: relative;
+  display: flex;
+}
+
+.fan {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.fanLine {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.1);
+  stroke-width: 1;
+}
+
+/* Little running dots that travel from each note toward the response. */
+.fanFlow {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.6);
+  stroke-width: 1.4;
+  stroke-linecap: round;
+  stroke-dasharray: 4 46;
+  stroke-dashoffset: 50;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.flow[data-visible="true"] .fanFlow {
+  opacity: 1;
+  animation: flow 2.8s linear infinite;
+  animation-delay: calc(var(--d) * -0.42s);
+}
+
+@keyframes flow {
+  from {
+    stroke-dashoffset: 50;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Vertical connector used when the flow stacks on small screens. */
+.drop {
+  display: none;
+}
+
+/* ---------- Right: the single response ---------- */
+.answer {
+  flex: 1 1 0;
+  max-width: 380px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Same sender language as the engine section. */
+.sender {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 11px;
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: #8a8c92;
+}
+
+.senderMark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #2f3238;
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: 0.72rem;
+  line-height: 1;
+  color: #e9ebef;
+}
+
+.senderGlyph {
+  display: block;
+  font-style: normal;
+  transform: translate(0.45px, -1.38px);
+}
+
+.bubble {
+  position: relative;
+  max-width: 100%;
+  padding: 13px 16px;
+  border-radius: 16px;
+  background: #2c2e33;
+  color: #f2f2f2;
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  line-height: 1.45;
+  letter-spacing: -0.01em;
+  box-shadow: 0 30px 70px -45px rgba(0, 0, 0, 0.8);
+  transform-origin: left center;
+  opacity: 0;
+  transform: scale(0.7) translateY(8px);
+  /* Fast, undelayed reset when it leaves view, so opacity really returns to 0
+   * — that guarantees a genuine 0 -> 1 change (a fresh fade) on every return,
+   * even if you scroll off and back quickly. */
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.flow[data-visible="true"] .bubble {
+  opacity: 1;
+  transform: none;
+  /* The delayed spring-in only applies on the way in, so it plays like the
+   * first time every time the section scrolls back into view. */
+  transition: opacity 0.5s ease 0.7s,
+    transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.7s;
+}
+
+/* A soft breathing glow, so the assembled answer feels alive, not static. */
+.bubble::before {
+  content: "";
+  position: absolute;
+  inset: -16px;
+  z-index: -1;
+  border-radius: 26px;
+  background: radial-gradient(
+    60% 60% at 28% 50%,
+    rgba(255, 255, 255, 0.1),
+    transparent 70%
+  );
+  opacity: 0;
+}
+
+.flow[data-visible="true"] .bubble::before {
+  animation: glow 5.5s ease-in-out infinite 1.2s;
+}
+
+@keyframes glow {
+  0%,
+  100% {
+    opacity: 0.45;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+  .flow {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+  }
+  .memories {
+    width: 100%;
+    max-width: 460px;
+    flex: 0 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  /* A lone final card centres itself instead of hanging on the left. */
+  .memory:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+  .converge {
+    flex: 0 0 auto;
+    width: auto;
+    height: 34px;
+    justify-content: center;
+  }
+  .fan {
+    display: none;
+  }
+  .drop {
+    display: block;
+    position: relative;
+    width: 2px;
+    height: 100%;
+    border-radius: 2px;
+    background: rgba(255, 255, 255, 0.12);
+    overflow: hidden;
+  }
+  .drop::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 45%;
+    background: linear-gradient(
+      180deg,
+      transparent,
+      rgba(255, 255, 255, 0.72) 55%,
+      transparent
+    );
+    animation: dropflow 1.9s linear infinite;
+  }
+  @keyframes dropflow {
+    0% {
+      transform: translateY(-120%);
+    }
+    100% {
+      transform: translateY(340%);
+    }
+  }
+  .answer {
+    width: 100%;
+    max-width: 460px;
+    flex: 0 0 auto;
+    align-items: flex-start;
+  }
+  .bubble {
+    max-width: 100%;
+  }
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .memory,
+  .bubble,
+  .footnote,
+  .fanFlow {
+    transition: none;
+  }
+  .memInner,
+  .memDot,
+  .drop::after {
+    animation: none;
+  }
+  .flow[data-visible="true"] .fanFlow {
+    animation: none;
+    opacity: 0.7;
+    stroke-dashoffset: 0;
+  }
+  .bubble::before,
+  .flow[data-visible="true"] .bubble::before {
+    animation: none;
+    opacity: 0;
+  }
+}

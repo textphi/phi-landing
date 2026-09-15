@@ -1,6 +1,6 @@
 "use client";
 
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import styles from "./PhoneMockup.module.css";
 
 /* Tiny inline icons so the frame stays crisp at any scale and ships no assets. */
@@ -142,9 +142,10 @@ const B1 =
   "lol give me a sec, checking similar tariff shocks + NVDA's latest SEC filing";
 const B2 =
   "nah. most of the past moves faded, and nothing i found changes the business yet. you're still up 31% on it";
+const U2 = "oh thank god";
 const B3 =
   "you've got an exam tomorrow anyway. don't stress, i'll watch it";
-const U2 = "lol you're right";
+const U3 = "lol you're right";
 const C1 = "got you";
 
 type Msg = {
@@ -164,9 +165,10 @@ const FULL: Msg[] = [
   { id: 3, side: "out", paras: [U1] },
   { id: 4, side: "in", paras: [B1] },
   { id: 5, side: "in", paras: [B2] },
-  { id: 6, side: "in", paras: [B3] },
-  { id: 7, side: "out", paras: [U2], delivered: true },
-  { id: 8, side: "in", paras: [C1] },
+  { id: 6, side: "out", paras: [U2] },
+  { id: 7, side: "in", paras: [B3] },
+  { id: 8, side: "out", paras: [U3], delivered: true },
+  { id: 9, side: "in", paras: [C1] },
 ];
 
 export default function PhoneMockup() {
@@ -174,14 +176,36 @@ export default function PhoneMockup() {
   const [typing, setTyping] = useState(false);
   const [draft, setDraft] = useState("");
   const [visible, setVisible] = useState(true);
+  const [cycle, setCycle] = useState(0);
+  const phoneRef = useRef<HTMLDivElement>(null);
 
+  /*
+   * The conversation belongs to whoever scrolls to it, and it replays from the
+   * first bubble every time. Each entry into view bumps `cycle`, which tears
+   * down the running animation below and starts it fresh — so scrolling away
+   * and back (from either direction) always restarts from the top.
+   */
   useEffect(() => {
-    // Respect reduced motion: show the finished conversation, no looping.
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    if (mq.matches) {
+    // Respect reduced motion: show the finished conversation, no animation.
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       setMessages(FULL);
       return;
     }
+    const el = phoneRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) setCycle((c) => c + 1);
+      },
+      { threshold: 0.35 }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  useEffect(() => {
+    // Driven by the observer above; cycle 0 is the pre-view state.
+    if (cycle === 0) return;
 
     let cancelled = false;
     const sleep = (ms: number) =>
@@ -253,19 +277,10 @@ export default function PhoneMockup() {
         if (cancelled) return;
         setTyping(false);
         setMessages((m) => [...m, { id: 5, side: "in", paras: [B2] }]);
-        await sleep(1200);
+        await sleep(1100);
         if (cancelled) return;
 
-        // Phi turn 2 — reassuring follow-up
-        setTyping(true);
-        await sleep(700);
-        if (cancelled) return;
-        setTyping(false);
-        setMessages((m) => [...m, { id: 6, side: "in", paras: [B3] }]);
-        await sleep(1600);
-        if (cancelled) return;
-
-        // User: "lol you're right"
+        // User: "oh thank god" — reacting to the good news
         await typeInto(U2);
         if (cancelled) return;
         await sleep(200);
@@ -273,17 +288,39 @@ export default function PhoneMockup() {
         setDraft("");
         setMessages((m) => [
           ...clearDelivered(m),
-          { id: 7, side: "out", paras: [U2], delivered: true },
+          { id: 6, side: "out", paras: [U2], delivered: true },
+        ]);
+        await sleep(500);
+        if (cancelled) return;
+
+        // Phi turn 3 — reassuring follow-up
+        setTyping(true);
+        await sleep(700);
+        if (cancelled) return;
+        setTyping(false);
+        setMessages((m) => [...m, { id: 7, side: "in", paras: [B3] }]);
+        await sleep(1600);
+        if (cancelled) return;
+
+        // User: "lol you're right"
+        await typeInto(U3);
+        if (cancelled) return;
+        await sleep(200);
+        if (cancelled) return;
+        setDraft("");
+        setMessages((m) => [
+          ...clearDelivered(m),
+          { id: 8, side: "out", paras: [U3], delivered: true },
         ]);
         await sleep(350);
         if (cancelled) return;
 
-        // Phi turn 3 — sign-off
+        // Phi turn 4 — sign-off
         setTyping(true);
         await sleep(500);
         if (cancelled) return;
         setTyping(false);
-        setMessages((m) => [...m, { id: 8, side: "in", paras: [C1] }]);
+        setMessages((m) => [...m, { id: 9, side: "in", paras: [C1] }]);
 
         // Hold the finished conversation
         await sleep(3500);
@@ -299,10 +336,11 @@ export default function PhoneMockup() {
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [cycle]);
 
   return (
     <div
+      ref={phoneRef}
       className={styles.phone}
       role="img"
       aria-label="An iMessage conversation with Phi about a stock move."

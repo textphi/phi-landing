@@ -53,7 +53,7 @@ const CARDS: Card[] = [
     ],
   },
   {
-    header: "Run strategies",
+    header: "Paper trade strategies",
     convo: [
       { side: "out", text: "yo phi, i wanna mess around with options" },
       { side: "out", text: "run the wheel on NVDA with $20k paper cash" },
