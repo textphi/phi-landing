@@ -142,8 +142,10 @@ const B1 =
   "lol give me a sec, checking similar tariff shocks + NVDA's latest SEC filing";
 const B2 =
   "nah. most of the past moves faded, and nothing i found changes the business yet. you're still up 31% on it";
-const U2 = "lmk if that changes";
-const C1 = "got you. i'm watching it";
+const B3 =
+  "you've got an exam tomorrow anyway. don't stress, i'll watch it";
+const U2 = "lol you're right";
+const C1 = "got you";
 
 type Msg = {
   id: number;
@@ -162,8 +164,9 @@ const FULL: Msg[] = [
   { id: 3, side: "out", paras: [U1] },
   { id: 4, side: "in", paras: [B1] },
   { id: 5, side: "in", paras: [B2] },
-  { id: 6, side: "out", paras: [U2], delivered: true },
-  { id: 7, side: "in", paras: [C1] },
+  { id: 6, side: "in", paras: [B3] },
+  { id: 7, side: "out", paras: [U2], delivered: true },
+  { id: 8, side: "in", paras: [C1] },
 ];
 
 export default function PhoneMockup() {
@@ -250,10 +253,19 @@ export default function PhoneMockup() {
         if (cancelled) return;
         setTyping(false);
         setMessages((m) => [...m, { id: 5, side: "in", paras: [B2] }]);
+        await sleep(1200);
+        if (cancelled) return;
+
+        // Phi turn 2 — reassuring follow-up
+        setTyping(true);
+        await sleep(700);
+        if (cancelled) return;
+        setTyping(false);
+        setMessages((m) => [...m, { id: 6, side: "in", paras: [B3] }]);
         await sleep(1600);
         if (cancelled) return;
 
-        // User: "lmk if that changes"
+        // User: "lol you're right"
         await typeInto(U2);
         if (cancelled) return;
         await sleep(200);
@@ -261,7 +273,7 @@ export default function PhoneMockup() {
         setDraft("");
         setMessages((m) => [
           ...clearDelivered(m),
-          { id: 6, side: "out", paras: [U2], delivered: true },
+          { id: 7, side: "out", paras: [U2], delivered: true },
         ]);
         await sleep(350);
         if (cancelled) return;
@@ -271,7 +283,7 @@ export default function PhoneMockup() {
         await sleep(500);
         if (cancelled) return;
         setTyping(false);
-        setMessages((m) => [...m, { id: 7, side: "in", paras: [C1] }]);
+        setMessages((m) => [...m, { id: 8, side: "in", paras: [C1] }]);
 
         // Hold the finished conversation
         await sleep(3500);

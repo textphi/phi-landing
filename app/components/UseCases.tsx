@@ -89,7 +89,7 @@ const CARDS: Card[] = [
     ],
   },
   {
-    header: "Never loses context",
+    header: "Remembers everything",
     convo: [
       { side: "out", text: "thinking about buying more TSLA" },
       { side: "in", text: "wait lol, you're about to break your own rule" },
