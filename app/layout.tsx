@@ -18,7 +18,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Phi - Give your portfolio a superbrain",
   description:
-    "Phi is the superbrain for your investments, in your texts. Research, watch, and simulate — all from a conversation.",
+    "Phi is the superbrain for your investments, in your texts. Research, watch, and simulate - all from a conversation.",
 };
 
 export const viewport: Viewport = {
