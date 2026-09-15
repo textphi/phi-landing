@@ -28,10 +28,18 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Invalid request." }, { status: 400 });
   }
 
-  const { phone, agreedToTerms } = payload as {
+  const { firstName, phone, agreedToTerms } = payload as {
+    firstName?: unknown;
     phone?: unknown;
     agreedToTerms?: unknown;
   };
+
+  const trimmedFirstName = typeof firstName === "string" ? firstName.trim() : "";
+
+  if (!trimmedFirstName || trimmedFirstName.length > 80) {
+    return NextResponse.json({ error: "Enter your first name." }, { status: 400 });
+  }
+
   const phoneNumber = typeof phone === "string" ? normalizePhoneNumber(phone) : null;
 
   if (!phoneNumber) {
@@ -69,6 +77,7 @@ export async function POST(request: Request) {
         Prefer: "return=minimal",
       },
       body: JSON.stringify({
+        first_name: trimmedFirstName,
         phone_number: phoneNumber,
         agreed_to_terms_and_conditions: true,
         terms_version: "2026-09-08",

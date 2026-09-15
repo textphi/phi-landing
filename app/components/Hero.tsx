@@ -11,6 +11,7 @@ export default function Hero() {
   const [waitlistOpen, setWaitlistOpen] = useState(false);
   const [joined, setJoined] = useState(false);
   const [accepted, setAccepted] = useState(false);
+  const [firstName, setFirstName] = useState("");
   const [phone, setPhone] = useState("");
   const [submissionState, setSubmissionState] = useState<SubmissionState>("idle");
   const [submissionMessage, setSubmissionMessage] = useState("");
@@ -18,7 +19,7 @@ export default function Hero() {
   const submitWaitlist = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    if (!accepted || !phone.trim() || submissionState === "submitting") return;
+    if (!accepted || !firstName.trim() || !phone.trim() || submissionState === "submitting") return;
 
     setSubmissionState("submitting");
     setSubmissionMessage("");
@@ -28,6 +29,7 @@ export default function Hero() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          firstName,
           phone,
           agreedToTerms: accepted,
         }),
@@ -38,6 +40,7 @@ export default function Hero() {
         throw new Error(result.error || "We couldn’t add you right now. Please try again.");
       }
 
+      setFirstName("");
       setPhone("");
       setAccepted(false);
       setSubmissionState("idle");
@@ -140,6 +143,24 @@ export default function Hero() {
             <h2 id="waitlist-title" className={styles.modalTitle}>Join the waitlist</h2>
 
             <form className={styles.waitlistForm} onSubmit={submitWaitlist}>
+              <label className={styles.fieldLabel} htmlFor="waitlist-first-name">First name</label>
+              <input
+                className={styles.phoneInput}
+                id="waitlist-first-name"
+                name="firstName"
+                type="text"
+                autoComplete="given-name"
+                placeholder="Alex"
+                autoFocus
+                required
+                value={firstName}
+                disabled={submissionState === "submitting"}
+                onChange={(event) => {
+                  setFirstName(event.target.value);
+                  if (submissionState === "error") setSubmissionState("idle");
+                }}
+              />
+
               <label className={styles.fieldLabel} htmlFor="waitlist-phone">Phone number</label>
               <input
                 className={styles.phoneInput}
@@ -149,7 +170,6 @@ export default function Hero() {
                 inputMode="tel"
                 autoComplete="tel"
                 placeholder="+1 555 123 4567"
-                autoFocus
                 required
                 value={phone}
                 disabled={submissionState === "submitting"}
@@ -183,6 +203,7 @@ export default function Hero() {
                 type="submit"
                 disabled={
                   !accepted ||
+                  !firstName.trim() ||
                   !phone.trim() ||
                   submissionState === "submitting"
                 }
