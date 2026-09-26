@@ -220,7 +220,7 @@ export default function Hero() {
                 role={submissionState === "error" ? "alert" : "status"}
                 aria-live="polite"
               >
-                {submissionMessage || "We’ll reach out when the beta releases."}
+                {submissionMessage || "We’ll be in touch soon."}
               </p>
             </form>
           </div>
