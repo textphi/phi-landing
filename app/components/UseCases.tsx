@@ -7,6 +7,7 @@ type Row = {
   side: "in" | "out";
   text?: string;
   link?: string;
+  reaction?: "👀" | "❤️";
   chart?: { label: string; value: number }[];
 };
 
@@ -19,15 +20,15 @@ const CARDS: Card[] = [
       { side: "out", text: "dig into MU vs SNDK for me" },
       {
         side: "in",
-        text: "on it. checking SEC filings, earnings, memory pricing + analyst estimates",
+        text: "On it. Checking SEC filings, earnings, memory pricing, and analyst estimates.",
       },
       {
         side: "in",
-        text: "MU is cheaper with more HBM exposure. SNDK is more of a pure NAND bet",
+        text: "MU is cheaper with more HBM exposure. SNDK is more of a pure NAND play.",
       },
       {
         side: "in",
-        text: "btw, you're already 22% exposed to memory. anything else you wanna dig into?",
+        text: "You're already 22% exposed to memory. Anything else you'd like to explore?",
       },
     ],
   },
@@ -35,8 +36,8 @@ const CARDS: Card[] = [
     header: "Mirror public trades",
     convo: [
       { side: "out", text: "mirror pelosi's trades with 200 bucks" },
-      { side: "in", text: "done. shadowing her disclosures with $200 from here" },
-      { side: "in", text: "i'll keep you posted on the orders to place" },
+      { side: "in", text: "Done. Shadowing her disclosures with $200 from here." },
+      { side: "in", text: "I'll keep you updated on the orders to place." },
     ],
   },
   {
@@ -44,12 +45,12 @@ const CARDS: Card[] = [
     convo: [
       {
         side: "in",
-        text: "trump just tweeted this. could hit NVDA, and maybe GM too given the tariff angle",
+        text: "Trump just posted this. It could affect NVDA, and possibly GM given the tariff exposure.",
         link: "truthsocial.com/@realDonaldTrump/...",
       },
-      { side: "in", text: "you've got $2.6k in GM with similar exposure" },
-      { side: "out", text: "lmk if either drops 5%" },
-      { side: "in", text: "got you. watching them" },
+      { side: "in", text: "You have $2.6k in GM with similar exposure." },
+      { side: "out", text: "lmk if either drops 5%", reaction: "👀" },
+      { side: "in", text: "Understood. Monitoring both." },
     ],
   },
   {
@@ -59,7 +60,7 @@ const CARDS: Card[] = [
       { side: "out", text: "run the wheel on NVDA with $20k paper cash" },
       {
         side: "in",
-        text: "done. i'll keep it running + track it against just holding NVDA",
+        text: "Done. I'll keep it running and track it against simply holding NVDA.",
       },
     ],
   },
@@ -67,9 +68,9 @@ const CARDS: Card[] = [
     header: "Rebalance in plain English",
     convo: [
       { side: "out", text: "i feel like i'm way too heavy in tech rn" },
-      { side: "in", text: "yeah, you're at 43%" },
+      { side: "in", text: "Yes, you're at 43%." },
       { side: "out", text: "can we get that down to 30%?" },
-      { side: "in", text: "yep. mapping out the trades now" },
+      { side: "in", text: "Yes. Mapping out the trades now." },
     ],
   },
   {
@@ -92,13 +93,13 @@ const CARDS: Card[] = [
     header: "Remembers everything",
     convo: [
       { side: "out", text: "thinking about buying more TSLA" },
-      { side: "in", text: "wait lol, you're about to break your own rule" },
+      { side: "in", text: "That would put you above your own limit." },
       {
         side: "in",
-        text: "in may you said you wouldn't let it get above 15% of your portfolio. you're at 14.7% rn",
+        text: "In May, you said you wouldn't let it exceed 15% of your portfolio. You're at 14.7% now.",
       },
       { side: "out", text: "bruh i forgot" },
-      { side: "in", text: "i didn't" },
+      { side: "in", text: "That's what I'm here for.", reaction: "❤️" },
     ],
   },
 ];
@@ -147,10 +148,20 @@ function UseCard({ card, hidden }: { card: Card; hidden?: boolean }) {
           }
           const side = row.side === "in" ? styles.incoming : styles.outgoing;
           const g = grouped ? ` ${styles.grouped}` : "";
+          const reactionClass = row.reaction ? ` ${styles.reacted}` : "";
           return (
-            <div key={i} className={`${styles.bubble} ${side}${g}`}>
+            <div key={i} className={`${styles.bubble} ${side}${g}${reactionClass}`}>
               {row.text}
               {row.link && <span className={styles.msgLink}>{row.link}</span>}
+              {row.reaction && (
+                <span
+                  className={styles.reaction}
+                  role="img"
+                  aria-label={row.reaction === "👀" ? "Phi reacted with eyes" : "You reacted with a heart"}
+                >
+                  {row.reaction}
+                </span>
+              )}
             </div>
           );
         })}

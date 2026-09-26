@@ -45,7 +45,7 @@ const MESSAGES: {
   from: { logo: string; src: string; item: string };
 }[] = [
   {
-    text: "microsoft's q4 call is out. azure beat, but they guided margins lower for next quarter",
+    text: "Microsoft's Q4 call is out. Azure beat expectations, but they guided margins lower for next quarter.",
     from: {
       logo: "Microsoft",
       src: "Earnings",
@@ -53,7 +53,7 @@ const MESSAGES: {
     },
   },
   {
-    text: "pelosi disclosed a new semi position 20 min ago. want me to shadow it?",
+    text: "Pelosi disclosed a new semiconductor position 20 min ago. Would you like me to shadow it?",
     from: {
       logo: "Congress",
       src: "Congress",

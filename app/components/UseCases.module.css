@@ -136,6 +136,36 @@
   margin-top: 2px;
 }
 
+.reacted {
+  position: relative;
+}
+
+.outgoing.reacted {
+  margin-top: 18px;
+}
+
+.reaction {
+  position: absolute;
+  top: -16px;
+  right: -7px;
+  min-width: 28px;
+  height: 24px;
+  padding: 0 4px;
+  display: grid;
+  place-items: center;
+  border: 2px solid #16171a;
+  border-radius: 999px;
+  background: #0a84ff;
+  font-size: 14px;
+  line-height: 1;
+}
+
+.outgoing .reaction {
+  right: auto;
+  left: -7px;
+  background: #353539;
+}
+
 .msgLink {
   display: block;
   margin-top: 4px;

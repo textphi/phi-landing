@@ -1,6 +1,6 @@
 "use client";
 
-import { Fragment, useEffect, useRef, useState } from "react";
+import { Fragment, useEffect, useLayoutEffect, useRef, useState } from "react";
 import styles from "./PhoneMockup.module.css";
 
 /* Tiny inline icons so the frame stays crisp at any scale and ships no assets. */
@@ -135,24 +135,26 @@ function SendArrow() {
 
 // Phi's first turn is two separate bubbles; so is the research turn.
 const A1 =
-  "trump just posted about new chip tariffs. NVDA is down 6%, people on X think more restrictions could be coming";
-const A2 = "and you've got 18% of your portfolio in it";
+  "Trump just posted about new chip tariffs. NVDA is down 6%. People on X think more restrictions could be coming.";
+const A2 = "You have 18% of your portfolio in it.";
 const U1 = "am i cooked";
 const B1 =
-  "lol give me a sec, checking similar tariff shocks + NVDA's latest SEC filing";
+  "Give me a moment. I'm checking similar tariff shocks and NVDA's latest SEC filing.";
 const B2 =
-  "nah. most of the past moves faded, and nothing i found changes the business yet. you're still up 31% on it";
+  "No. Most of the past moves faded, and nothing I've found changes the business yet. You're still up 31% on it.";
 const U2 = "oh thank god";
 const B3 =
-  "you've got an exam tomorrow anyway. don't stress, i'll watch it";
-const U3 = "lol you're right";
-const C1 = "got you";
+  "You have an exam tomorrow. Focus on that, and I'll keep monitoring it.";
+const U3 = "lmk if it drops another 5%";
+const U4 = "thanks phi";
+const C1 = "Anytime.";
 
 type Msg = {
   id: number;
   side: "in" | "out";
   paras: string[];
   delivered?: boolean;
+  reaction?: "👀";
 };
 
 // "Delivered" only sits under the most recent sent message.
@@ -167,8 +169,9 @@ const FULL: Msg[] = [
   { id: 5, side: "in", paras: [B2] },
   { id: 6, side: "out", paras: [U2] },
   { id: 7, side: "in", paras: [B3] },
-  { id: 8, side: "out", paras: [U3], delivered: true },
-  { id: 9, side: "in", paras: [C1] },
+  { id: 8, side: "out", paras: [U3], reaction: "👀" },
+  { id: 9, side: "out", paras: [U4], delivered: true },
+  { id: 10, side: "in", paras: [C1] },
 ];
 
 export default function PhoneMockup() {
@@ -178,6 +181,48 @@ export default function PhoneMockup() {
   const [visible, setVisible] = useState(true);
   const [cycle, setCycle] = useState(0);
   const phoneRef = useRef<HTMLDivElement>(null);
+
+  useLayoutEffect(() => {
+    const phone = phoneRef.current;
+    if (!phone) return;
+
+    let active = true;
+    const fitBubbles = () => {
+      if (!active) return;
+      phone.querySelectorAll<HTMLElement>(`.${styles.incoming}`).forEach((bubble) => {
+        const paragraphs = bubble.querySelectorAll("p");
+        if (!paragraphs.length) return;
+
+        // Wrap at the normal maximum, then remove unused space beside the text.
+        bubble.style.width = "";
+        const style = getComputedStyle(bubble);
+        const width = parseFloat(style.width);
+        const scale = bubble.getBoundingClientRect().width / width;
+        if (!scale) return;
+
+        let textWidth = 0;
+        const range = document.createRange();
+        paragraphs.forEach((paragraph) => {
+          range.selectNodeContents(paragraph);
+          for (const line of range.getClientRects()) {
+            textWidth = Math.max(textWidth, line.width / scale);
+          }
+        });
+
+        const padding = parseFloat(style.paddingLeft) + parseFloat(style.paddingRight);
+        bubble.style.width = `${Math.min(width, Math.ceil(textWidth + padding))}px`;
+      });
+    };
+
+    fitBubbles();
+    const observer = new ResizeObserver(fitBubbles);
+    observer.observe(phone);
+    void document.fonts.ready.then(fitBubbles);
+    return () => {
+      active = false;
+      observer.disconnect();
+    };
+  }, [messages]);
 
   /*
    * The conversation belongs to whoever scrolls to it, and it replays from the
@@ -302,7 +347,7 @@ export default function PhoneMockup() {
         await sleep(1600);
         if (cancelled) return;
 
-        // User: "lol you're right"
+        // The user sets a watch, and Phi acknowledges it with a reaction.
         await typeInto(U3);
         if (cancelled) return;
         await sleep(200);
@@ -312,15 +357,33 @@ export default function PhoneMockup() {
           ...clearDelivered(m),
           { id: 8, side: "out", paras: [U3], delivered: true },
         ]);
+        await sleep(800);
+        if (cancelled) return;
+        setMessages((m) => m.map((message) =>
+          message.id === 8 ? { ...message, reaction: "👀" } : message
+        ));
+        await sleep(700);
+        if (cancelled) return;
+
+        // The user thanks Phi after the watch is acknowledged.
+        await typeInto(U4);
+        if (cancelled) return;
+        await sleep(200);
+        if (cancelled) return;
+        setDraft("");
+        setMessages((m) => [
+          ...clearDelivered(m),
+          { id: 9, side: "out", paras: [U4], delivered: true },
+        ]);
         await sleep(350);
         if (cancelled) return;
 
-        // Phi turn 4 — sign-off
+        // Phi's sign-off is the final message.
         setTyping(true);
         await sleep(500);
         if (cancelled) return;
         setTyping(false);
-        setMessages((m) => [...m, { id: 9, side: "in", paras: [C1] }]);
+        setMessages((m) => [...m, { id: 10, side: "in", paras: [C1] }]);
 
         // Hold the finished conversation
         await sleep(3500);
@@ -393,9 +456,14 @@ export default function PhoneMockup() {
               </div>
             ) : (
               <Fragment key={m.id}>
-                <div className={`${styles.outgoingRow}${g}`}>
+                <div className={`${styles.outgoingRow}${g}${m.reaction ? ` ${styles.reacted}` : ""}`}>
                   <div className={`${styles.bubble} ${styles.outgoing}`}>
                     {m.paras[0]}
+                    {m.reaction && (
+                      <span className={styles.reaction} role="img" aria-label="Phi reacted with eyes">
+                        {m.reaction}
+                      </span>
+                    )}
                   </div>
                 </div>
                 {m.delivered && (
