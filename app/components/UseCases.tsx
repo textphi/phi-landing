@@ -7,6 +7,7 @@ type Row = {
   side: "in" | "out";
   text?: string;
   link?: string;
+  reaction?: "👀" | "❤️";
   chart?: { label: string; value: number }[];
 };
 
@@ -48,7 +49,7 @@ const CARDS: Card[] = [
         link: "truthsocial.com/@realDonaldTrump/...",
       },
       { side: "in", text: "You have $2.6k in GM with similar exposure." },
-      { side: "out", text: "lmk if either drops 5%" },
+      { side: "out", text: "lmk if either drops 5%", reaction: "👀" },
       { side: "in", text: "Understood. Monitoring both." },
     ],
   },
@@ -98,7 +99,7 @@ const CARDS: Card[] = [
         text: "In May, you said you wouldn't let it exceed 15% of your portfolio. You're at 14.7% now.",
       },
       { side: "out", text: "bruh i forgot" },
-      { side: "in", text: "That's what I'm here for." },
+      { side: "in", text: "That's what I'm here for.", reaction: "❤️" },
     ],
   },
 ];
@@ -147,10 +148,20 @@ function UseCard({ card, hidden }: { card: Card; hidden?: boolean }) {
           }
           const side = row.side === "in" ? styles.incoming : styles.outgoing;
           const g = grouped ? ` ${styles.grouped}` : "";
+          const reactionClass = row.reaction ? ` ${styles.reacted}` : "";
           return (
-            <div key={i} className={`${styles.bubble} ${side}${g}`}>
+            <div key={i} className={`${styles.bubble} ${side}${g}${reactionClass}`}>
               {row.text}
               {row.link && <span className={styles.msgLink}>{row.link}</span>}
+              {row.reaction && (
+                <span
+                  className={styles.reaction}
+                  role="img"
+                  aria-label={row.reaction === "👀" ? "Phi reacted with eyes" : "You reacted with a heart"}
+                >
+                  {row.reaction}
+                </span>
+              )}
             </div>
           );
         })}

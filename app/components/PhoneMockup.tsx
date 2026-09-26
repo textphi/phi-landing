@@ -145,7 +145,8 @@ const B2 =
 const U2 = "oh thank god";
 const B3 =
   "You have an exam tomorrow. Focus on that, and I'll keep monitoring it.";
-const U3 = "lol you're right";
+const U3 = "lmk if it drops another 5%";
+const U4 = "thanks phi";
 const C1 = "Anytime.";
 
 type Msg = {
@@ -153,6 +154,7 @@ type Msg = {
   side: "in" | "out";
   paras: string[];
   delivered?: boolean;
+  reaction?: "👀";
 };
 
 // "Delivered" only sits under the most recent sent message.
@@ -167,8 +169,9 @@ const FULL: Msg[] = [
   { id: 5, side: "in", paras: [B2] },
   { id: 6, side: "out", paras: [U2] },
   { id: 7, side: "in", paras: [B3] },
-  { id: 8, side: "out", paras: [U3], delivered: true },
-  { id: 9, side: "in", paras: [C1] },
+  { id: 8, side: "out", paras: [U3], reaction: "👀" },
+  { id: 9, side: "out", paras: [U4], delivered: true },
+  { id: 10, side: "in", paras: [C1] },
 ];
 
 export default function PhoneMockup() {
@@ -344,7 +347,7 @@ export default function PhoneMockup() {
         await sleep(1600);
         if (cancelled) return;
 
-        // User: "lol you're right"
+        // The user sets a watch, and Phi acknowledges it with a reaction.
         await typeInto(U3);
         if (cancelled) return;
         await sleep(200);
@@ -354,15 +357,33 @@ export default function PhoneMockup() {
           ...clearDelivered(m),
           { id: 8, side: "out", paras: [U3], delivered: true },
         ]);
+        await sleep(800);
+        if (cancelled) return;
+        setMessages((m) => m.map((message) =>
+          message.id === 8 ? { ...message, reaction: "👀" } : message
+        ));
+        await sleep(700);
+        if (cancelled) return;
+
+        // The user thanks Phi after the watch is acknowledged.
+        await typeInto(U4);
+        if (cancelled) return;
+        await sleep(200);
+        if (cancelled) return;
+        setDraft("");
+        setMessages((m) => [
+          ...clearDelivered(m),
+          { id: 9, side: "out", paras: [U4], delivered: true },
+        ]);
         await sleep(350);
         if (cancelled) return;
 
-        // Phi turn 4 — sign-off
+        // Phi's sign-off is the final message.
         setTyping(true);
         await sleep(500);
         if (cancelled) return;
         setTyping(false);
-        setMessages((m) => [...m, { id: 9, side: "in", paras: [C1] }]);
+        setMessages((m) => [...m, { id: 10, side: "in", paras: [C1] }]);
 
         // Hold the finished conversation
         await sleep(3500);
@@ -435,9 +456,14 @@ export default function PhoneMockup() {
               </div>
             ) : (
               <Fragment key={m.id}>
-                <div className={`${styles.outgoingRow}${g}`}>
+                <div className={`${styles.outgoingRow}${g}${m.reaction ? ` ${styles.reacted}` : ""}`}>
                   <div className={`${styles.bubble} ${styles.outgoing}`}>
                     {m.paras[0]}
+                    {m.reaction && (
+                      <span className={styles.reaction} role="img" aria-label="Phi reacted with eyes">
+                        {m.reaction}
+                      </span>
+                    )}
                   </div>
                 </div>
                 {m.delivered && (

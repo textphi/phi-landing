@@ -222,6 +222,7 @@
 }
 
 .outgoing {
+  position: relative;
   align-self: flex-end;
   /* Apple's real iMessage blue (systemBlue). */
   background: #0a84ff;
@@ -240,6 +241,26 @@
 /* Consecutive messages from the same sender sit tighter together. */
 .grouped {
   margin-top: calc(var(--w) * 0.004);
+}
+
+.reacted {
+  margin-top: calc(var(--w) * 0.06);
+}
+
+.reaction {
+  position: absolute;
+  top: calc(var(--w) * -0.05);
+  left: calc(var(--w) * -0.02);
+  width: calc(var(--w) * 0.08);
+  height: calc(var(--w) * 0.07);
+  display: grid;
+  place-items: center;
+  border: calc(var(--w) * 0.005) solid #000;
+  border-radius: 999px;
+  background: #353539;
+  font-size: calc(var(--w) * 0.04);
+  line-height: 1;
+  animation: bubbleIn 0.22s ease-out both;
 }
 
 /* Typing indicator */
@@ -282,6 +303,7 @@
 @media (prefers-reduced-motion: reduce) {
   .dot,
   .bubble,
+  .reaction,
   .caret {
     animation: none;
   }
