@@ -20,7 +20,7 @@ const MEMORIES: { label: string; text: string }[] = [
 
 /* The single answer all of that context folds into. */
 const RESPONSE =
-  "NVDA’s down 7% on the chip headline. usually where you sell too fast, but your AI infra thesis runs 5 years and you’re still under your 20% cap. AMD’s on sale too, the one you keep eyeing. go focus on your interview thursday, i’ll watch this.";
+  "NVDA’s down 7% on the chip headline. You tend to sell too quickly on drops like this, but your AI infrastructure thesis runs 5 years and you’re still under your 20% cap. AMD, which you’ve been watching, is lower too. Focus on your interview Thursday. I’ll monitor this.";
 
 /* Five paths fan from evenly spaced points on the left to one point on the
  * right, so many notes visibly converge on a single response. */
