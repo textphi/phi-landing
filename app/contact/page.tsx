@@ -123,8 +123,7 @@ export default function ContactPage() {
               Disconnect anytime, by text.
             </h2>
             <p className={styles.lede}>
-              Text Phi to disconnect your brokerage, delete all of your data, or
-              both. Whichever you ask for, it happens right away.
+              Text Phi anytime to disconnect your brokerage or delete all your data.
             </p>
           </section>
         </div>
