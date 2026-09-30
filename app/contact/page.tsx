@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 // `sms:` opens the user's messaging app with an empty draft to this number.
 const AADIT_NUMBER = "+16479948661";
-const BALDEEP_NUMBER = "+16476879784";
+const BALDEEP_NUMBER = "+16476878794";
 
 type Founder = {
   name: string;
