@@ -13,8 +13,6 @@ export const metadata: Metadata = {
 // `sms:` opens the user's messaging app with an empty draft to this number.
 const AADIT_NUMBER = "+16479948661";
 const BALDEEP_NUMBER = "+16476879784";
-// TODO: replace with Phi's real number before launch.
-const PHI_NUMBER = "+10000000000";
 
 type Founder = {
   name: string;
@@ -79,7 +77,7 @@ export default function ContactPage() {
               Who you&rsquo;re texting.
             </h1>
             <p className={styles.lede}>
-              Questions, feedback, bugs, anything at all — text either of us and
+              Questions, feedback, bugs, anything at all. Text either of us and
               we&rsquo;ll get back to you as fast as we can.
             </p>
 
@@ -125,18 +123,9 @@ export default function ContactPage() {
               Disconnect anytime, by text.
             </h2>
             <p className={styles.lede}>
-              To disconnect your brokerage or delete your data, just text Phi.
-              Access is read-only, and it ends the moment you ask.
+              Text Phi to disconnect your brokerage, delete all of your data, or
+              both. Whichever you ask for, it happens right away.
             </p>
-            <div className={styles.panelAction}>
-              <a
-                className={`${styles.textButton} ${styles.textButtonLarge}`}
-                href={`sms:${PHI_NUMBER}`}
-              >
-                <IMessageIcon />
-                Text Phi
-              </a>
-            </div>
           </section>
         </div>
       </main>
