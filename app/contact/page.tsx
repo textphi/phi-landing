@@ -40,7 +40,7 @@ const FOUNDERS: Founder[] = [
     bio: "Building Phi. Text me about the product, your portfolio, or anything that feels broken.",
     photo: "/baldeep_pfp.png",
     number: BALDEEP_NUMBER,
-    crop: { "--zoom": 2.5, "--shift-x": "2%", "--shift-y": "28%" } as CSSProperties,
+    crop: { "--zoom": 1.9, "--shift-x": "2%", "--shift-y": "20%" } as CSSProperties,
   },
 ];
 
