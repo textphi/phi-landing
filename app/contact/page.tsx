@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Footer from "../components/Footer";
@@ -9,10 +10,10 @@ export const metadata: Metadata = {
     "Text the people building Phi. Questions, feedback, or account changes — all by message.",
 };
 
-// TODO: replace with the real numbers before launch. `sms:` opens the user's
-// messaging app with an empty draft to this number.
-const AADIT_NUMBER = "+10000000000";
-const BALDEEP_NUMBER = "+10000000000";
+// `sms:` opens the user's messaging app with an empty draft to this number.
+const AADIT_NUMBER = "+16479948661";
+const BALDEEP_NUMBER = "+16476879784";
+// TODO: replace with Phi's real number before launch.
 const PHI_NUMBER = "+10000000000";
 
 type Founder = {
@@ -21,6 +22,8 @@ type Founder = {
   bio: string;
   photo: string;
   number: string;
+  // how far to zoom and nudge the photo to centre the face in the circle
+  crop?: CSSProperties;
 };
 
 const FOUNDERS: Founder[] = [
@@ -35,8 +38,9 @@ const FOUNDERS: Founder[] = [
     name: "Baldeep",
     role: "Co-founder",
     bio: "Building Phi. Text me about the product, your portfolio, or anything that feels broken.",
-    photo: "/baldeep_pfp.jpg",
+    photo: "/baldeep_pfp.png",
     number: BALDEEP_NUMBER,
+    crop: { "--zoom": 2.5, "--shift-x": "2%", "--shift-y": "28%" } as CSSProperties,
   },
 ];
 
@@ -69,35 +73,30 @@ export default function ContactPage() {
         </header>
 
         <div className={styles.inner}>
-          <section className={styles.block} aria-labelledby="contact-heading">
-            <p className={styles.eyebrow}>Support</p>
-            <h1 id="contact-heading" className={styles.heading}>
-              Text us directly.
-            </h1>
-            <p className={styles.lede}>
-              Phi is built by two people. Questions, feedback, bugs, or account
-              issues — message either of us and you&rsquo;ll get a real reply.
-              Include your name so we know who we&rsquo;re talking to.
-            </p>
-          </section>
-
           <section className={styles.block} aria-labelledby="founders-heading">
             <p className={styles.eyebrow}>The team</p>
-            <h2 id="founders-heading" className={styles.heading}>
+            <h1 id="founders-heading" className={styles.heading}>
               Who you&rsquo;re texting.
-            </h2>
+            </h1>
+            <p className={styles.lede}>
+              Questions, feedback, bugs, anything at all — text either of us and
+              we&rsquo;ll get back to you as fast as we can.
+            </p>
 
             <div className={styles.cards}>
               {FOUNDERS.map((founder) => (
                 <article className={styles.card} key={founder.name}>
                   <div className={styles.person}>
-                    <Image
-                      className={styles.avatar}
-                      src={founder.photo}
-                      alt={`${founder.name}, ${founder.role} of Phi`}
-                      width={46}
-                      height={46}
-                    />
+                    <div className={styles.avatar}>
+                      <Image
+                        className={styles.avatarImage}
+                        style={founder.crop}
+                        src={founder.photo}
+                        alt={`${founder.name}, ${founder.role} of Phi`}
+                        width={184}
+                        height={184}
+                      />
+                    </div>
                     <div>
                       <div className={styles.name}>{founder.name}</div>
                       <div className={styles.role}>{founder.role}</div>
