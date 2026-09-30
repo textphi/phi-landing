@@ -56,6 +56,7 @@ export default function Footer() {
       <div className={styles.details}>
         <p className={styles.tagline}>Giving every portfolio a superbrain</p>
         <div className={styles.legal}>
+          <a href="/contact">Contact Us</a>
           <a href="/terms">Terms &amp; Conditions</a>
           <a href="/privacy">Privacy Policy</a>
         </div>
