@@ -65,6 +65,16 @@ const CARDS: Card[] = [
     ],
   },
   {
+    header: "Pull up an options chain",
+    convo: [
+      { side: "out", text: "pull up the NVDA calls for oct 16" },
+      { side: "in", text: "NVDA's at $184. The $185 is $6.20 mid, 48% IV." },
+      { side: "in", text: "$190 is $4.05, $200 is $1.98." },
+      { side: "out", text: "whats my breakeven on the 190" },
+      { side: "in", text: "$194.05. NVDA needs +5.5% by expiry." },
+    ],
+  },
+  {
     header: "Rebalance in plain English",
     convo: [
       { side: "out", text: "i feel like i'm way too heavy in tech rn" },
