@@ -27,7 +27,7 @@ type Founder = {
 const FOUNDERS: Founder[] = [
   {
     name: "Aadit",
-    role: "Co-founder",
+    role: "Founder",
     bio: "Building Phi",
     photo: "/aadit_pfp.jpg",
     number: AADIT_NUMBER,
