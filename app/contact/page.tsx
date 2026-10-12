@@ -28,14 +28,14 @@ const FOUNDERS: Founder[] = [
   {
     name: "Aadit",
     role: "Co-founder",
-    bio: "Building Phi. Text me about the product, your portfolio, or anything that feels broken.",
+    bio: "Building Phi",
     photo: "/aadit_pfp.jpg",
     number: AADIT_NUMBER,
   },
   {
     name: "Baldeep",
-    role: "Co-founder",
-    bio: "Building Phi. Text me about the product, your portfolio, or anything that feels broken.",
+    role: "Founding Engineer",
+    bio: "Building Phi",
     photo: "/baldeep_pfp.png",
     number: BALDEEP_NUMBER,
     crop: { "--zoom": 1.9, "--shift-x": "2%", "--shift-y": "20%" } as CSSProperties,
