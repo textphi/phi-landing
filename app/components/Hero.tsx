@@ -90,7 +90,7 @@ export default function Hero() {
       <div className={styles.grid}>
         <div className={styles.content}>
           <h1 className={styles.headline}>
-            Give your portfolio a <em className={styles.italic}>superbrain</em>.
+            The future of investing is in your <em className={styles.italic}>contacts</em>.
           </h1>
 
           <p className={styles.subline}>

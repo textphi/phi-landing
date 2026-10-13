@@ -16,22 +16,22 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Phi - Give your portfolio a superbrain",
+  title: "Phi - The future of investing is in your contacts",
   description:
-    "Phi is the superbrain for your investments, in your texts. Research, watch, and simulate - all from a conversation.",
+    "Phi is a superbrain equity analyst that lives in your texts, working 24/7. Research, watch, and simulate - all from a conversation.",
   openGraph: {
-    title: "Give your portfolio a superbrain.",
+    title: "The future of investing is in your contacts.",
     description:
-      "Phi is the superbrain for your investments, in your texts. Research, watch, and simulate - all from a conversation.",
+      "Phi is a superbrain equity analyst that lives in your texts, working 24/7. Research, watch, and simulate - all from a conversation.",
     url: "https://textphi.com",
     siteName: "Phi",
     type: "website",
   },
   twitter: {
     card: "summary",
-    title: "Give your portfolio a superbrain.",
+    title: "The future of investing is in your contacts.",
     description:
-      "Phi is the superbrain for your investments, in your texts. Research, watch, and simulate - all from a conversation.",
+      "Phi is a superbrain equity analyst that lives in your texts, working 24/7. Research, watch, and simulate - all from a conversation.",
   },
 };
 
