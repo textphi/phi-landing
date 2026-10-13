@@ -19,6 +19,20 @@ export const metadata: Metadata = {
   title: "Phi - Give your portfolio a superbrain",
   description:
     "Phi is the superbrain for your investments, in your texts. Research, watch, and simulate - all from a conversation.",
+  openGraph: {
+    title: "Give your portfolio a superbrain.",
+    description:
+      "Phi is the superbrain for your investments, in your texts. Research, watch, and simulate - all from a conversation.",
+    url: "https://textphi.com",
+    siteName: "Phi",
+    type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: "Give your portfolio a superbrain.",
+    description:
+      "Phi is the superbrain for your investments, in your texts. Research, watch, and simulate - all from a conversation.",
+  },
 };
 
 export const viewport: Viewport = {
