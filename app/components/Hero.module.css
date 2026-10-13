@@ -100,14 +100,14 @@
 }
 
 .content {
-  max-width: 40rem;
+  max-width: 44rem;
   text-align: left;
 }
 
 .headline {
   font-family: var(--font-serif);
   font-weight: 340;
-  font-size: clamp(2.35rem, 6.2vw, 5.75rem);
+  font-size: clamp(2.35rem, 4.8vw, 4.5rem);
   line-height: 1.03;
   letter-spacing: -0.02em;
   color: #fff;
