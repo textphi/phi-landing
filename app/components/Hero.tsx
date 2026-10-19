@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import styles from "./Hero.module.css";
 import HeroVideo from "./HeroVideo";
@@ -109,6 +110,22 @@ export default function Hero() {
               <p className={styles.betaNote}>Private beta &middot; rolling access</p>
             </>
           )}
+
+          <a
+            className={styles.featured}
+            href="https://canadianfintech.substack.com/p/canadian-fintech-ai-for-warranty"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span className={styles.featuredLabel}>As featured in</span>
+            <Image
+              className={styles.featuredLogo}
+              src="/press/canadian-fintech.png"
+              alt="Canadian Fintech Newsletter"
+              width={575}
+              height={202}
+            />
+          </a>
         </div>
 
         <div className={styles.phoneWrap}>
