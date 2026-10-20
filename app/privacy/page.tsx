@@ -89,7 +89,18 @@ export default function PrivacyPage() {
       </section>
 
       <section>
-        <h2>7. How we disclose information</h2>
+        <h2>7. Human review and beta assistance</h2>
+        <p>
+          During beta testing, authorized Phi personnel may review
+          conversations, investigate inaccurate responses, and assist with
+          generating or correcting responses, maintaining user preferences, and
+          providing proactive updates. Access is limited to legitimate service
+          operations, troubleshooting, and improvement purposes.
+        </p>
+      </section>
+
+      <section>
+        <h2>8. How we disclose information</h2>
         <p>We may disclose information to:</p>
         <ul>
           <li>SnapTrade and connected financial institutions as needed to establish and maintain authorized connections;</li>
@@ -104,7 +115,7 @@ export default function PrivacyPage() {
       </section>
 
       <section>
-        <h2>8. Data retention</h2>
+        <h2>9. Data retention</h2>
         <p>
           We retain information for as long as reasonably necessary to provide
           the Services, maintain portfolio context, comply with legal obligations,
@@ -115,7 +126,7 @@ export default function PrivacyPage() {
       </section>
 
       <section>
-        <h2>9. Security</h2>
+        <h2>10. Security</h2>
         <p>
           We use reasonable administrative, technical, and organizational
           safeguards designed to protect personal information. No method of
@@ -125,7 +136,7 @@ export default function PrivacyPage() {
       </section>
 
       <section>
-        <h2>10. Your choices and rights</h2>
+        <h2>11. Your choices and rights</h2>
         <p>
           Depending on where you live, you may have rights to access, correct,
           delete, or receive a copy of your personal information, or to object to
@@ -136,7 +147,7 @@ export default function PrivacyPage() {
       </section>
 
       <section>
-        <h2>11. Children&rsquo;s privacy</h2>
+        <h2>12. Children&rsquo;s privacy</h2>
         <p>
           Phi is intended for people who are at least 18 years old. We do not
           knowingly collect personal information from children.
@@ -144,7 +155,7 @@ export default function PrivacyPage() {
       </section>
 
       <section>
-        <h2>12. International processing</h2>
+        <h2>13. International processing</h2>
         <p>
           Phi and its service providers may process information in Canada, the
           United States, and other countries. Privacy laws in those locations may
@@ -153,7 +164,7 @@ export default function PrivacyPage() {
       </section>
 
       <section>
-        <h2>13. Changes to this policy</h2>
+        <h2>14. Changes to this policy</h2>
         <p>
           We may update this Privacy Policy as Phi evolves or legal requirements
           change. We will post the updated policy here and revise the date above.
@@ -161,7 +172,7 @@ export default function PrivacyPage() {
       </section>
 
       <section>
-        <h2>14. Contact</h2>
+        <h2>15. Contact</h2>
         <p>
           If you have questions about this Privacy Policy or want to make a
           privacy request, contact Phi through the contact method provided in the
