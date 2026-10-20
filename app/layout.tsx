@@ -16,6 +16,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://textphi.com"),
   title: "Phi - The future of investing is in your contacts",
   description:
     "Phi is a superbrain equity analyst that lives in your texts, working 24/7. Research, watch, and simulate - all from a conversation.",
