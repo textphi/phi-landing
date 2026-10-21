@@ -95,7 +95,7 @@ export default function Hero() {
           </h1>
 
           <p className={styles.subline}>
-            Research. Watch. Test. In your texts.
+            Your personal investing agent, in your texts.
           </p>
 
           {joined ? (
