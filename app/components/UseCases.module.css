@@ -65,17 +65,17 @@
 .track {
   display: flex;
   width: max-content;
-  align-items: flex-start;
+  /* Every card stretches to the tallest one, so heights match without a
+     hardcoded value that a longer thread could overflow. */
+  align-items: stretch;
 }
 
-/* ---------- Card: fixed width + fixed height, content top-aligned ---------- */
+/* ---------- Card: fixed width, height matched by the track, content top-aligned ---------- */
 .card {
   flex-shrink: 0;
   /* Tight width range so wrapping (and therefore height) stays stable across
-     desktop widths, letting the fixed height hug the tallest card. Wide enough
-     for the longest heading to sit on one line. */
+     desktop widths. Wide enough for the longest heading to sit on one line. */
   width: clamp(410px, 30vw, 440px);
-  height: 18rem;
   margin-right: 16px;
   padding: 16px 16px 14px;
   background: #16171a;
@@ -173,7 +173,7 @@
   color: #4da3ff;
   text-decoration: underline;
   text-underline-offset: 2px;
-  word-break: break-all;
+  overflow-wrap: anywhere;
 }
 
 /* ---------- Chart attachment ---------- */
@@ -230,7 +230,6 @@
 @media (max-width: 600px) {
   .card {
     width: clamp(280px, 82vw, 340px);
-    height: 22.5rem;
   }
   .cardHeader {
     font-size: clamp(1.3rem, 5.5vw, 1.55rem);
