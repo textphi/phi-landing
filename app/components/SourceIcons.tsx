@@ -13,7 +13,7 @@ import type { ReactNode } from "react";
  *  - SEC, U.S. Congress        -> no company owns these, so they get a small
  *                                 circular US flag (circle-flags, MIT)
  *
- * Categories that have no owner (your rule, paper portfolio, ...) keep
+ * Categories that have no owner (your rule, your habits, ...) keep
  * Lucide-style strokes (ISC) on a muted badge, which also separates "real
  * source" from "your own data" at a glance.
  */
@@ -236,15 +236,14 @@ const LOGOS: Record<string, Logo> = {
     ),
   },
 
-  "Paper portfolio": {
-    label: "Paper portfolio",
+  "Your habits": {
+    label: "Your habits",
     bg: "#647087",
     color: "#e8ebf0",
     node: (
       <svg viewBox="0 0 24 24" {...stroke}>
-        <path d="M10 2v7.31L4.7 17.6A2 2 0 0 0 6.5 21h11a2 2 0 0 0 1.8-3.4L14 9.3V2" />
-        <path d="M8.5 2h7" />
-        <path d="M7 16h10" />
+        <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
+        <circle cx="12" cy="12" r="3" />
       </svg>
     ),
   },

@@ -23,7 +23,7 @@ const SOURCES: { src: string; text: string; logo: string }[] = [
   { src: "Market data", text: "TSLA volume 2.4x average", logo: "Tesla" },
   { src: "Your portfolio", text: "18% NVDA", logo: "Nvidia" },
   { src: "Your rule", text: "Max position 15%", logo: "Your rule" },
-  { src: "Paper portfolio", text: "Hedge experiment #3", logo: "Paper portfolio" },
+  { src: "Your habits", text: "Eyeing AMD, thinks it's pricey", logo: "Your habits" },
 ];
 
 /** What the loader is doing, keyed to how far through the pass it is. */
