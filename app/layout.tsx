@@ -19,11 +19,11 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://textphi.com"),
   title: "Phi - The future of investing is in your contacts",
   description:
-    "Phi is a superbrain equity analyst that lives in your texts, working 24/7. Research, watch, and simulate - all from a conversation.",
+    "Phi is your personal investing agent. It knows your portfolio, learns how you invest over time, and watches the financial world 24/7, reaching out first when something matters to you.",
   openGraph: {
     title: "The future of investing is in your contacts.",
     description:
-      "Phi is a superbrain equity analyst that lives in your texts, working 24/7. Research, watch, and simulate - all from a conversation.",
+      "Phi is your personal investing agent. It knows your portfolio, learns how you invest over time, and watches the financial world 24/7, reaching out first when something matters to you.",
     url: "https://textphi.com",
     siteName: "Phi",
     type: "website",
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     card: "summary",
     title: "The future of investing is in your contacts.",
     description:
-      "Phi is a superbrain equity analyst that lives in your texts, working 24/7. Research, watch, and simulate - all from a conversation.",
+      "Phi is your personal investing agent. It knows your portfolio, learns how you invest over time, and watches the financial world 24/7, reaching out first when something matters to you.",
   },
 };
 
