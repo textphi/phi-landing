@@ -54,7 +54,7 @@ export default function Footer() {
       <a className={styles.wordmark} href="/" aria-label="Go to Phi home" onClick={goHome}>Phi</a>
 
       <div className={styles.details}>
-        <p className={styles.tagline}>Giving every portfolio a superbrain</p>
+        <p className={styles.tagline}>Giving every portfolio a personal agent</p>
         <div className={styles.legal}>
           <a href="/contact">Contact Us</a>
           <a href="/terms">Terms &amp; Conditions</a>
