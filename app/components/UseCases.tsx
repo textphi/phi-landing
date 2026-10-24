@@ -7,11 +7,17 @@ type Row = {
   side: "in" | "out";
   text?: string;
   link?: string;
-  reaction?: "👀" | "❤️";
+  reaction?: "👀" | "❤️" | "👍";
   chart?: { label: string; value: number }[];
 };
 
 type Card = { header: string; convo: Row[] };
+
+const REACTION_NAMES: Record<NonNullable<Row["reaction"]>, string> = {
+  "👀": "eyes",
+  "❤️": "a heart",
+  "👍": "a thumbs up",
+};
 
 const CARDS: Card[] = [
   {
@@ -54,14 +60,18 @@ const CARDS: Card[] = [
     ],
   },
   {
-    header: "Paper trade strategies",
+    header: "Learns how you invest",
     convo: [
-      { side: "out", text: "yo phi, i wanna mess around with options" },
-      { side: "out", text: "run the wheel on NVDA with $20k paper cash" },
       {
         side: "in",
-        text: "Done. I'll keep it running and track it against simply holding NVDA.",
+        text: "AMD just dropped 10% on China export news. You've been keeping an eye on it, but always felt the valuation was too high.",
+        link: "Reuters · AMD shares fall on export restrictions ↗",
       },
+      {
+        side: "in",
+        text: "It's now at $136, and you have very little semiconductor exposure. Want me to see how it fits with your holdings?",
+      },
+      { side: "out", text: "yeah go for it", reaction: "👍" },
     ],
   },
   {
@@ -167,7 +177,7 @@ function UseCard({ card, hidden }: { card: Card; hidden?: boolean }) {
                 <span
                   className={styles.reaction}
                   role="img"
-                  aria-label={row.reaction === "👀" ? "Phi reacted with eyes" : "You reacted with a heart"}
+                  aria-label={`${row.side === "out" ? "Phi" : "You"} reacted with ${REACTION_NAMES[row.reaction]}`}
                 >
                   {row.reaction}
                 </span>
@@ -267,9 +277,11 @@ export default function UseCases() {
     <section id="use-cases" className={styles.section}>
       <div className={styles.head}>
         <h2 className={styles.heading}>
-          Whatever you want to understand, track, or test.
+          Whatever you need, just text Phi.
         </h2>
-        <p className={styles.sub}>Just text Phi.</p>
+        <p className={styles.sub}>
+          Phi knows your portfolio, learns how you invest, and watches the world for you.
+        </p>
       </div>
 
       <div

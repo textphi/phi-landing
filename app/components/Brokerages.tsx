@@ -59,10 +59,10 @@ export default function Brokerages() {
     <section className={styles.section} aria-labelledby="brokerages-heading">
       <div className={styles.inner}>
         <h2 id="brokerages-heading" className={styles.heading}>
-          Secure portfolio connections powered by SnapTrade
+          Secure portfolio connections powered by SnapTrade.
         </h2>
         <p className={styles.subheading}>
-          Read-only access across leading brokerages in Canada and the United States
+          Read-only access across leading brokerages in Canada and the United States.
         </p>
 
         <div className={styles.logos} aria-label="Supported brokerages">

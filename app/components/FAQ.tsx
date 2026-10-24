@@ -19,8 +19,8 @@ const FAQ_ITEMS: FAQItem[] = [
     question: <>how is phi different from a chatbot like chatgpt?</>,
     answers: [
       <>A chatbot like ChatGPT waits for you to ask. Phi connects to your portfolio and texts you first about earnings, news, major moves, and what they mean for your investments.</>,
-      <>It&rsquo;s trained to think like an equity analyst, with access to research and data a general chatbot can&rsquo;t access.</>,
-      <>It also does things ChatGPT can&rsquo;t, like running paper trades to test an idea, and it remembers everything across your holdings and research.</>,
+      <>It also learns how you invest over time, from the stocks you keep coming back to and the prices you&rsquo;d buy at, so it can reach out when something lines up, even if you never asked it to watch.</>,
+      <>It&rsquo;s trained to think like an equity analyst, with access to research and data a general chatbot can&rsquo;t reach, and it remembers everything across your holdings and research.</>,
     ],
   },
   {
@@ -28,13 +28,14 @@ const FAQ_ITEMS: FAQItem[] = [
     answers: [
       <>You connect your brokerage with read-only access.</>,
       <>Phi can then understand what you own, how your portfolio changes, and what news, filings, earnings, and market events matter to you.</>,
+      <>Over time, it learns how you invest: what you watch, what you avoid, and the rules you set for yourself.</>,
     ],
   },
   {
     question: <>can phi move money or place trades?</>,
     answers: [
       <>Not right now. Phi is read-only.</>,
-      <>It can help you research a trade, test it in a paper portfolio, or tell you exactly what to place.</>,
+      <>It can help you research a trade, see how it fits with your portfolio, or tell you exactly what to place.</>,
       <>You stay in control of execution.</>,
     ],
   },
@@ -64,7 +65,7 @@ const FAQ_ITEMS: FAQItem[] = [
     question: <>will phi spam me with messages?</>,
     answers: [
       <>No. Phi is designed to text you when something matters, not every time the market moves.</>,
-      <>You can also tell it what you want to watch and how often you want updates.</>,
+      <>It learns what you care about over time, and you can always tell it what to watch and how often you want updates.</>,
     ],
   },
   {
