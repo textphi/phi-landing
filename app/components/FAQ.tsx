@@ -47,6 +47,13 @@ const FAQ_ITEMS: FAQItem[] = [
     ],
   },
   {
+    question: <>where is phi available?</>,
+    answers: [
+      <>Phi is available in the US and Canada.</>,
+      <>It works with leading brokerages in both countries through SnapTrade.</>,
+    ],
+  },
+  {
     question: <>which platforms is phi available on?</>,
     answers: [
       <>Phi works best on iMessage, which is end-to-end encrypted.</>,
