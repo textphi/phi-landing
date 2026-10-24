@@ -277,9 +277,11 @@ export default function UseCases() {
     <section id="use-cases" className={styles.section}>
       <div className={styles.head}>
         <h2 className={styles.heading}>
-          Knows your portfolio. Learns how you invest. Watches the world for you.
+          Whatever you need, just text Phi.
         </h2>
-        <p className={styles.sub}>Just text Phi.</p>
+        <p className={styles.sub}>
+          Phi knows your portfolio, learns how you invest, and watches the world for you.
+        </p>
       </div>
 
       <div
