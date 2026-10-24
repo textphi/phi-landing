@@ -148,7 +148,7 @@ export default function Engine() {
   return (
     <section id="engine" className={styles.section}>
       <div className={styles.head}>
-        <h2 className={styles.heading}>Research that runs 24/7</h2>
+        <h2 className={styles.heading}>Research that runs 24/7.</h2>
         <p className={styles.sub}>
           Filings, earnings, markets, news, social, and more. Phi keeps digging
           even when you&rsquo;re not.
