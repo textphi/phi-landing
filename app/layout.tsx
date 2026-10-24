@@ -17,13 +17,13 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://textphi.com"),
-  title: "Phi - The future of investing is in your contacts",
+  title: "Phi: Your personal investing agent, in your texts",
   description:
-    "Phi is your personal investing agent. It knows your portfolio, learns how you invest over time, and watches the financial world 24/7, reaching out first when something matters to you.",
+    "Phi is your personal investing agent. It knows your portfolio, learns how you invest, and texts you first when something matters.",
   openGraph: {
     title: "The future of investing is in your contacts.",
     description:
-      "Phi is your personal investing agent. It knows your portfolio, learns how you invest over time, and watches the financial world 24/7, reaching out first when something matters to you.",
+      "Phi is your personal investing agent. It knows your portfolio, learns how you invest, and texts you first when something matters.",
     url: "https://textphi.com",
     siteName: "Phi",
     type: "website",
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     card: "summary",
     title: "The future of investing is in your contacts.",
     description:
-      "Phi is your personal investing agent. It knows your portfolio, learns how you invest over time, and watches the financial world 24/7, reaching out first when something matters to you.",
+      "Phi is your personal investing agent. It knows your portfolio, learns how you invest, and texts you first when something matters.",
   },
 };
 

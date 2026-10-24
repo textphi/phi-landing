@@ -47,6 +47,12 @@ const FAQ_ITEMS: FAQItem[] = [
     ],
   },
   {
+    question: <>where is phi available?</>,
+    answers: [
+      <>Phi is available in Canada and the US.</>,
+    ],
+  },
+  {
     question: <>which platforms is phi available on?</>,
     answers: [
       <>Phi works best on iMessage, which is end-to-end encrypted.</>,
