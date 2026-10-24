@@ -49,7 +49,7 @@ const FAQ_ITEMS: FAQItem[] = [
   {
     question: <>where is phi available?</>,
     answers: [
-      <>Phi is available in the US and Canada.</>,
+      <>Phi is available in Canada and the US.</>,
     ],
   },
   {
