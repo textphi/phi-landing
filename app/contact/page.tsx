@@ -12,7 +12,6 @@ export const metadata: Metadata = {
 
 // `sms:` opens the user's messaging app with an empty draft to this number.
 const AADIT_NUMBER = "+16479948661";
-const BALDEEP_NUMBER = "+16476878794";
 
 type Founder = {
   name: string;
@@ -31,14 +30,6 @@ const FOUNDERS: Founder[] = [
     bio: "Building Phi",
     photo: "/aadit_pfp.jpg",
     number: AADIT_NUMBER,
-  },
-  {
-    name: "Baldeep",
-    role: "Founding Engineer",
-    bio: "Building Phi",
-    photo: "/baldeep_pfp.png",
-    number: BALDEEP_NUMBER,
-    crop: { "--zoom": 1.9, "--shift-x": "2%", "--shift-y": "20%" } as CSSProperties,
   },
 ];
 
@@ -77,8 +68,8 @@ export default function ContactPage() {
               Who you&rsquo;re texting.
             </h1>
             <p className={styles.lede}>
-              Questions, feedback, bugs, anything at all. Text either of us and
-              we&rsquo;ll get back to you as fast as we can.
+              Questions, feedback, bugs, anything at all. Text me and I&rsquo;ll
+              get back to you as fast as I can.
             </p>
 
             <div className={styles.cards}>
